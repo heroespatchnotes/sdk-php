@@ -44,7 +44,7 @@ class DataProvider extends BaseProvider
 	 * Sets the group then loads the data
 	 *
 	 * @param string $group      The name/filename for the group
-	 * @param string $patch|null The patch version, or null to use latest
+	 * @param string|null $patch The patch version, or null to use latest
 	 *
 	 * @throws RuntimeException For missing file
 	 * @throws JsonException    For invalid file

@@ -52,4 +52,11 @@ class DataProviderTest extends TestCase
 		$result = $provider->Abathur->unitId;
 		$this->assertEquals('HeroAbathur', $result);
 	}
+
+	public function testDataIsIterable()
+	{
+		$provider = new DataProvider(DataProvider::HERO);
+
+		$this->assertTrue(is_iterable($provider));
+	}
 }

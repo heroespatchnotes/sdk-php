@@ -119,6 +119,26 @@ abstract class BaseProvider implements ProviderInterface
 	{
 		return $this->source;
 	}
+	
+	/**
+	 * Returns raw data.
+	 *
+	 * @return object
+	 */
+	public function getData(): object
+	{
+		return $this->data;
+	}
+
+	/**
+	 * Returns the data as an iterator.
+	 *
+	 * @return Traversable
+	 */
+	public function getIterator(): Traversable
+	{
+		return $this->data;
+	}
 
 	//--------------------------------------------------------------------
 	// Magic Data Accessors
