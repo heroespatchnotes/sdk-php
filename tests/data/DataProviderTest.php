@@ -31,4 +31,15 @@ class DataProviderTest extends TestCase
 
 		$this->assertStringContainsString($expected, $result);
 	}
+
+	public function testConstructorLoadsData()
+	{
+		$provider = new DataProvider(DataProvider::HERO);
+
+		$result = $provider->Abathur;
+		$this->assertIsObject($result);
+
+		$result = $provider->Abathur->unitId;
+		$this->assertEquals('HeroAbathur', $result);
+	}
 }
