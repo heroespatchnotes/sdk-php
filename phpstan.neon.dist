@@ -1,0 +1,14 @@
+parameters:
+	tmpDir: build/phpstan
+	level: 5
+	paths:
+		- src
+		- tests
+	bootstrapFiles:
+		- tests/_support/bootstrap.php
+	excludes_analyse:
+	ignoreErrors:
+	universalObjectCratesClasses:
+		- Faker\Generator
+	scanDirectories:
+	dynamicConstantNames:
