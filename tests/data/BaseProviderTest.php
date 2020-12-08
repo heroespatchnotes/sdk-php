@@ -34,12 +34,11 @@ class BaseProviderTest extends TestCase
 
 	public function testSetPatchSetsMetaData()
 	{
-		$expected = (object) [
-			'hdp' => '4.5.0',
-		];
-
 		$this->provider->setPatch($this->patch);
 
-		$this->assertEquals($expected, $this->provider->getMetaData());
+		$metaData = $this->provider->getMetaData();
+
+		$this->assertIsObject($metaData);
+		$this->assertObjectHasAttribute('hdp', $metaData);
 	}
 }

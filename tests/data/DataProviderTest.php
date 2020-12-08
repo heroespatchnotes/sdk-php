@@ -32,6 +32,16 @@ class DataProviderTest extends TestCase
 		$this->assertStringContainsString($expected, $result);
 	}
 
+	public function testGetDirectoryFallsBackOnDuplicate()
+	{
+		$provider = new DataProvider(DataProvider::HERO, '2.48.3.77205');
+		$expected = '2.48.2.76893';
+
+		$result = $provider->getDirectory();
+
+		$this->assertStringContainsString($expected, $result);
+	}
+
 	public function testConstructorLoadsData()
 	{
 		$provider = new DataProvider(DataProvider::HERO);

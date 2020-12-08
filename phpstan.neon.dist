@@ -10,5 +10,6 @@ parameters:
 	ignoreErrors:
 	universalObjectCratesClasses:
 		- Faker\Generator
+		- Tatter\Heroes\Interfaces\ProviderInterface
 	scanDirectories:
 	dynamicConstantNames:

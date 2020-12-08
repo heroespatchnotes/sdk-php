@@ -55,13 +55,15 @@ class DataProvider extends BaseProvider
 
 		$this->group = $group;
 
-		// Check for the actual file
-		$short = Locator::shortPatch($this->getPatch());
-		$file  = $this->getDirectory() . $this->group . 'data_' . $short . '_localized.json';
+		// Determine the de-duplicated directory
+		$directory = $this->getDirectory();
 
-		if (! is_file($file))
+		// Match the correct data file
+		$files = glob($directory . $this->group . 'data_*_localized.json');
+		$file  = reset($files);
+		if (! $file || ! is_file($file))
 		{
-			throw new RuntimeException('Data file missing: ' . $file);
+			throw new RuntimeException('Data file missing: ' . $file);			
 		}
 
 		$this->data = json_decode(file_get_contents($file), false, JSON_THROW_ON_ERROR);
