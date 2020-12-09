@@ -8,6 +8,7 @@ parameters:
 		- tests/_support/bootstrap.php
 	excludes_analyse:
 	ignoreErrors:
+		- '#Unsafe usage of new static\(\)#'
 	universalObjectCratesClasses:
 		- Faker\Generator
 		- Tatter\Heroes\Interfaces\ProviderInterface

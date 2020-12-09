@@ -8,43 +8,43 @@ class DataProviderTest extends TestCase
 	public function testConstructorThrowsInvalidGroup()
 	{
 		$this->expectException('RuntimeException');
-		$this->expectExceptionMessage('Data file missing:');
+		$this->expectExceptionMessage('Source file missing:');
 
-		$provider = new DataProvider('bitcoins');
+		$provider = DataProvider::get('bitcoins');
 	}
 
 	public function testGetGroup()
 	{
-		$provider = new DataProvider(DataProvider::HERO);
+		$provider = DataProvider::get(DataProvider::HERO);
 
 		$result = $provider->getGroup();
 
 		$this->assertEquals('hero', $result);
 	}
 
-	public function testGetDirectory()
+	public function testGetSource()
 	{
-		$provider = new DataProvider(DataProvider::HERO, $this->patch);
+		$provider = DataProvider::get(DataProvider::HERO, $this->patch);
 		$expected = 'heroesdata' . DIRECTORY_SEPARATOR . $this->patch . DIRECTORY_SEPARATOR . 'data';
 
-		$result = $provider->getDirectory();
+		$result = $provider->getSource();
 
 		$this->assertStringContainsString($expected, $result);
 	}
 
-	public function testGetDirectoryFallsBackOnDuplicate()
+	public function testGetSourceFallsBackOnDuplicate()
 	{
-		$provider = new DataProvider(DataProvider::HERO, '2.48.3.77205');
+		$provider = DataProvider::get(DataProvider::HERO, '2.48.3.77205');
 		$expected = '2.48.2.76893';
 
-		$result = $provider->getDirectory();
+		$result = $provider->getSource();
 
 		$this->assertStringContainsString($expected, $result);
 	}
 
 	public function testConstructorLoadsData()
 	{
-		$provider = new DataProvider(DataProvider::HERO);
+		$provider = DataProvider::get(DataProvider::HERO);
 
 		$result = $provider->Abathur;
 		$this->assertIsObject($result);
@@ -55,7 +55,7 @@ class DataProviderTest extends TestCase
 
 	public function testDataIsIterable()
 	{
-		$provider = new DataProvider(DataProvider::HERO);
+		$provider = DataProvider::get(DataProvider::HERO);
 
 		$this->assertTrue(is_iterable($provider));
 	}

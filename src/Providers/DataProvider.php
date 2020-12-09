@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tatter\Heroes\Providers;
 
 use Tatter\Heroes\Locator;
+use Tatter\Heroes\Interfaces\ProviderInterface;
 use JsonException;
 use RuntimeException;
 
@@ -36,49 +37,29 @@ class DataProvider extends BaseProvider
 	const VOICELINE         = 'voiceline';
 
 	/**
-	 * @var string
-	 */
-	private $group;
-	
-	/**
-	 * Sets the group then loads the data
+	 * Returns a new/shared instance.
 	 *
-	 * @param string $group      The name/filename for the group
+	 * @param string $group      The group
 	 * @param string|null $patch The patch version, or null to use latest
 	 *
-	 * @throws RuntimeException For missing file
-	 * @throws JsonException    For invalid file
+	 * @return ProviderInterface
 	 */
-	public function __construct(string $group, string $patch = null)
+	public static function get(string $group, string $patch = null): ProviderInterface
 	{
-		parent::__construct($patch);
-
-		$this->group = $group;
-
-		// Determine the de-duplicated directory
-		$directory = $this->getDirectory();
-
-		// Match the correct data file
-		$files = glob($directory . $this->group . 'data_*_localized.json');
-		$file  = reset($files);
-		if (! $file || ! is_file($file))
-		{
-			throw new RuntimeException('Data file missing: ' . $file);			
-		}
-
-		$this->data = json_decode(file_get_contents($file), false, JSON_THROW_ON_ERROR);
+		return parent::get($group, $patch);
 	}
-	
+
 	/**
-	 * Returns the group.
+	 * Returns the pattern used to locate the source
+	 * file within its de-duplicated directory.
 	 *
 	 * @return string
 	 */
-	public function getGroup(): string
+	protected function getPattern(): string
 	{
-		return $this->group;
+		return $this->getDirectory() . $this->getGroup() . 'data_*_localized.json';
 	}
-	
+
 	/**
 	 * Returns the de-duplicated directory.
 	 *
@@ -86,7 +67,7 @@ class DataProvider extends BaseProvider
 	 *
 	 * @throws RuntimeException For missing directory
 	 */
-	public function getDirectory(): string
+	private function getDirectory(): string
 	{
 		$guesses = [Locator::getPatchPath($this->getPatch())];
 

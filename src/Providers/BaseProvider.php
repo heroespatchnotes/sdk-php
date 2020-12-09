@@ -19,6 +19,21 @@ use Traversable;
 abstract class BaseProvider implements ProviderInterface
 {
 	/**
+	 * Array of shared instances, stored by
+	 * a hash of patch and group
+	 *
+	 * @var array<string,ProviderInterface>
+	 */
+	private static $instances;
+
+	//--------------------------------------------------------------------
+
+	/**
+	 * @var string
+	 */
+	private $group;
+
+	/**
 	 * @var string
 	 */
 	private $patch;
@@ -31,41 +46,62 @@ abstract class BaseProvider implements ProviderInterface
 	private $metaData;
 
 	/**
-	 * Path to the deduplicated source file
+	 * Path to the de-duplicated source file
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	protected $source;
 
 	/**
-	 * The loaded data.
+	 * The source file contents.
 	 *
 	 * @var object
 	 */
-	protected $data;
+	protected $contents;
 
 	//--------------------------------------------------------------------
 
 	/**
-	 * Returns the de-duplicated source directory.
+	 * Returns a new/shared instance.
 	 *
-	 * @return string
+	 * @param string $group      The group
+	 * @param string|null $patch The patch version, or null to use latest
 	 *
-	 * @throws RuntimeException For missing directory
+	 * @return ProviderInterface
 	 */
-	abstract protected function getDirectory(): string;
+	protected static function get(string $group, string $patch = null): ProviderInterface
+	{
+		$patch = $patch ?? Locator::getLatest();
+		$hash  = $group . '_' . $patch;
+
+		if (! isset(self::$instances[$hash]))
+		{
+			self::$instances[$hash] = new static($group, $patch);
+		}
+
+		return self::$instances[$hash];
+	}
 
 	//--------------------------------------------------------------------
-
+	
 	/**
-	 * Sets the patch.
+	 * Stores the group and patch and loads the contents.
 	 *
-	 * @param string $patch|null The patch version, or null to use latest
+	 * @param string $group The group
+	 * @param string $patch The patch version
+	 *
+	 * @throws RuntimeException For missing file
+	 * @throws JsonException    For invalid file
 	 */
-	public function __construct(string $patch = null)
+	private function __construct(string $group, string $patch)
 	{
 		$this->setPatch($patch ?? Locator::getLatest());
+		$this->group = $group;
+
+		$this->contents = json_decode(file_get_contents($this->getSource()), false, JSON_THROW_ON_ERROR);
 	}
+
+	//--------------------------------------------------------------------
 	
 	/**
 	 * Verifies and stores a patch version.
@@ -90,6 +126,50 @@ abstract class BaseProvider implements ProviderInterface
 	}
 
 	//--------------------------------------------------------------------
+
+	/**
+	 * Returns the pattern used to locate the source file with its directory.
+	 *
+	 * @return string
+	 */
+	abstract protected function getPattern(): string;
+
+	/**
+	 * Returns the de-duplicated source file.
+	 *
+	 * @return string
+	 *
+	 * @throws RuntimeException For file not found
+	 */
+	public function getSource(): string
+	{
+		if (is_null($this->source))
+		{
+			$pattern = $this->getPattern();
+
+			// Match the correct source file
+			$files = glob($pattern);
+			$file  = reset($files);
+			if (! $file || ! is_file($file))
+			{
+				throw new RuntimeException('Source file missing: ' . $pattern);			
+			}
+
+			$this->source = $file;
+		}
+
+		return $this->source;
+	}
+	
+	/**
+	 * Returns the group.
+	 *
+	 * @return string
+	 */
+	public function getGroup(): string
+	{
+		return $this->group;
+	}
 	
 	/**
 	 * Returns this provider's patch version.
@@ -110,25 +190,15 @@ abstract class BaseProvider implements ProviderInterface
 	{
 		return $this->metaData;
 	}
-	
-	/**
-	 * Returns the path to the source file.
-	 *
-	 * @return string
-	 */
-	public function getSource(): string
-	{
-		return $this->source;
-	}
 
 	/**
 	 * Returns raw data.
 	 *
 	 * @return object
 	 */
-	public function getData(): object
+	public function getContents(): object
 	{
-		return $this->data;
+		return $this->contents;
 	}
 
 	/**
@@ -138,7 +208,7 @@ abstract class BaseProvider implements ProviderInterface
 	 */
 	public function getIterator(): Traversable
 	{
-		return $this->data;
+		return $this->contents;
 	}
 
 	//--------------------------------------------------------------------
@@ -152,7 +222,7 @@ abstract class BaseProvider implements ProviderInterface
 	 */
 	public function __get(string $name)
 	{
-		return $this->data->$name;
+		return $this->contents->$name;
 	}
 
 	/**
@@ -162,6 +232,6 @@ abstract class BaseProvider implements ProviderInterface
 	 */
 	public function __isset(string $name): bool
 	{
-		return property_exists($this->data, $name);
+		return property_exists($this->contents, $name);
 	}
 }
