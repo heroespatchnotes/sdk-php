@@ -69,7 +69,7 @@ abstract class BaseProvider implements ProviderInterface
 	 *
 	 * @return ProviderInterface
 	 */
-	protected static function get(string $group, string $patch = null): ProviderInterface
+	protected static function get(string $group, string $patch = null)
 	{
 		$patch = $patch ?? Locator::getLatest();
 		$hash  = $group . '_' . $patch;

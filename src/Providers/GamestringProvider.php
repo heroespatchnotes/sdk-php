@@ -18,6 +18,8 @@ use RuntimeException;
  */
 class GamestringProvider extends BaseProvider
 {
+	use ProviderTrait;
+
 	/**
 	 * Locale Groups and Filenames
 	 */
@@ -33,19 +35,6 @@ class GamestringProvider extends BaseProvider
 	const RUSSIA  = 'ruru';
 	const CHINA   = 'zhcn';
 	const TAIWAN  = 'zhtw';
-
-	/**
-	 * Returns a new/shared instance.
-	 *
-	 * @param string $group      The group
-	 * @param string|null $patch The patch version, or null to use latest
-	 *
-	 * @return ProviderInterface
-	 */
-	public static function get(string $group, string $patch = null): ProviderInterface
-	{
-		return parent::get($group, $patch);
-	}
 
 	/**
 	 * Returns the pattern used to locate the source

@@ -17,6 +17,8 @@ use RuntimeException;
  */
 class DataProvider extends BaseProvider
 {
+	use ProviderTrait;
+
 	/**
 	 * Data Groups and Filenames
 	 */
@@ -35,19 +37,6 @@ class DataProvider extends BaseProvider
 	const SPRAY             = 'spray';
 	const UNIT              = 'unit';
 	const VOICELINE         = 'voiceline';
-
-	/**
-	 * Returns a new/shared instance.
-	 *
-	 * @param string $group      The group
-	 * @param string|null $patch The patch version, or null to use latest
-	 *
-	 * @return ProviderInterface
-	 */
-	public static function get(string $group, string $patch = null): ProviderInterface
-	{
-		return parent::get($group, $patch);
-	}
 
 	/**
 	 * Returns the pattern used to locate the source
