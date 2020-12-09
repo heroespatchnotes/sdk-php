@@ -24,8 +24,8 @@ class DataProviderTest extends TestCase
 
 	public function testGetDirectory()
 	{
-		$provider = new DataProvider(DataProvider::HERO);
-		$expected = 'heroesdata' . DIRECTORY_SEPARATOR . $provider->getPatch() . DIRECTORY_SEPARATOR . 'data';
+		$provider = new DataProvider(DataProvider::HERO, $this->patch);
+		$expected = 'heroesdata' . DIRECTORY_SEPARATOR . $this->patch . DIRECTORY_SEPARATOR . 'data';
 
 		$result = $provider->getDirectory();
 

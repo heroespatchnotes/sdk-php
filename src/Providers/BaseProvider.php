@@ -8,6 +8,7 @@ use Tatter\Heroes\Interfaces\ProviderInterface;
 use Tatter\Heroes\Locator;
 use JsonException;
 use RuntimeException;
+use Traversable;
 
 /**
  * Base Provider Abstract Class
@@ -119,7 +120,7 @@ abstract class BaseProvider implements ProviderInterface
 	{
 		return $this->source;
 	}
-	
+
 	/**
 	 * Returns raw data.
 	 *
