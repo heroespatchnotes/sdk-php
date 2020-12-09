@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Support;
 
 use Tatter\Heroes\Locator;
-use Tatter\Heroes\Providers\DataProvider;
+use Tatter\Heroes\Providers\BaseProvider;
 use JsonException;
 use RuntimeException;
 
@@ -14,8 +14,10 @@ use RuntimeException;
  *
  * Exposes BaseProvider methods for testing
  */
-class DummyProvider extends DataProvider
+class DummyProvider extends BaseProvider
 {
+	use \Tatter\Heroes\Providers\ProviderTrait;
+
 	/**
 	 * Verifies and stores a patch version.
 	 *
@@ -27,5 +29,16 @@ class DummyProvider extends DataProvider
 	public function setPatch(string $patch)
 	{
 		parent::setPatch($patch);
+	}
+
+	/**
+	 * Returns the pattern used to locate the source
+	 * file within its de-duplicated directory.
+	 *
+	 * @return string
+	 */
+	public function getPattern(): string
+	{
+		return __DIR__ . DIRECTORY_SEPARATOR . 'test.json';
 	}
 }

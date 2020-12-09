@@ -12,7 +12,7 @@ class HeroProviderTest extends TestCase
 
 	protected function setUp(): void
 	{
-		$this->provider = new DataProvider(DataProvider::HERO);
+		$this->provider = DataProvider::get(DataProvider::HERO);
 	}
 
 	public function testHasHeroes()
@@ -27,7 +27,7 @@ class HeroProviderTest extends TestCase
 
 	public function testKeysAreHeroIDs()
 	{
-		$result = array_keys((array) $this->provider->getData());
+		$result = array_keys((array) $this->provider->getContents());
 
 		$this->assertContains('Zeratul', $result);
 	}

@@ -12,7 +12,7 @@ class BaseProviderTest extends TestCase
 
 	protected function setUp(): void
 	{
-		$this->provider = new DummyProvider();
+		$this->provider = DummyProvider::get('test');
 	}
 
 	public function testSetPatchThrowsInvalidPatch()
