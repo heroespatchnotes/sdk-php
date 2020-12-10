@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace Tatter\Heroes\Factories;
 
 use Tatter\Heroes\Entities\Hero;
-use Tatter\Heroes\Providers\DataProvider;
-use Tatter\Heroes\Providers\GamestringProvider;
-use RuntimeException;
 
 /**
  * Hero Factory
@@ -15,35 +12,14 @@ use RuntimeException;
  * Uses or creates a Hero DataProvider
  * to generate hero data.
  */
-class HeroFactory
+class HeroFactory extends BaseFactory
 {
 	/**
-	 * @var DataProvider
-	 */
-	private $data;
-
-	/**
-	 * @var GamestringProvider
-	 */
-	private $gamestrings;
-
-	/**
-	 * Initializes the DataProvider
+	 * Group to use for the Data Provider
 	 *
-	 * @param DataProvider|null $provider A Hero Data Provider
-	 *
-	 * @throws RuntimeException For missing file
+	 * @var string
 	 */
-	public function __construct(DataProvider $data = null, GamestringProvider $gamestrings = null)
-	{
-		$this->data        = $data ?? new DataProvider(DataProvider::HERO);
-		$this->gamestrings = $gamestrings ?? new GamestringProvider(GamestringProvider::USA);
-
-		if ($this->data->getGroup() !== 'hero')
-		{
-			throw new RuntimeException('Data Provider group must match the factory');
-		}
-	}
+	protected $group = DataProvider::HERO;
 
 	/**
 	 * Returns a hero identified by $heroId
@@ -55,5 +31,15 @@ class HeroFactory
 	public function get(string $heroId): Hero
 	{
 		return new Hero($heroId, $this->data->$heroId, $this->gamestrings);
+	}
+
+	/**
+	 * Returns the data as an iterator.
+	 *
+	 * @return Traversable
+	 */
+	public function getIterator(): Traversable
+	{
+		return [];
 	}
 }
