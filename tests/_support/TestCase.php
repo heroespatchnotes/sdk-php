@@ -7,4 +7,10 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
  */
 abstract class TestCase extends BaseTestCase
 {
+	/**
+	 * Default patch for non-specific tests.
+	 *
+	 * @var string
+	 */
+	protected $patch = '2.47.2.76003';
 }
