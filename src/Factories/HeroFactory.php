@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Tatter\Heroes\Factories;
 
 use Tatter\Heroes\Entities\Hero;
+use Tatter\Heroes\Providers\DataProvider;
+use ArrayIterator;
+use Traversable;
 
 /**
  * Hero Factory
@@ -30,16 +33,27 @@ class HeroFactory extends BaseFactory
 	 */
 	public function get(string $heroId): Hero
 	{
-		return new Hero($heroId, $this->data->$heroId, $this->gamestrings);
+		// Use the other factories to get child content
+		$abilities = new AbilityFactory($this->strings->getGroup(), $this->data->getPatch());
+		$talents   = new TalentFactory($this->strings->getGroup(), $this->data->getPatch());
+
+		return new Hero($heroId, $abilities->hero($heroId), $talents->hero($heroId));
 	}
 
 	/**
-	 * Returns the data as an iterator.
+	 * Returns an iterable version of all Heroes.
 	 *
 	 * @return Traversable
 	 */
 	public function getIterator(): Traversable
 	{
-		return [];
+		$heroes = [];
+
+		foreach ($this->data->getContents() as $heroId => $heroContents)
+		{
+			$heroes[] = $this->get($heroId);
+		}
+
+		return new ArrayIterator($heroes);
 	}
 }

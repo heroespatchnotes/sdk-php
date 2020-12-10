@@ -12,44 +12,82 @@ use RuntimeException;
 /**
  * Hero Entity
  */
-class Hero
+class Hero extends BaseEntity
 {
 	/**
-	 * @var string
+	 * @var Ability[]
 	 */
-	private $id;
+	private $abilities;
 
 	/**
-	 * @var DataProvider
+	 * @var Talent[]
 	 */
-	private $data;
+	private $talents;
 
 	/**
-	 * @var GamestringProvider
-	 */
-	private $gamestrings;
-
-	/**
-	 * Builds the Hero from the herodata and gamestrings
+	 * Builds the Hero
 	 *
-	 * @param string $id          The "hyperlink" hero ID
-	 * @param object $herodata    Game data from Provider for a single hero
-	 * @param object $gamestrings Gamestrings from Provider for a single hero
-	 *
-	 * @throws RuntimeException For missing file
+	 * @param string $heroId
+	 * @param array $abilities
+	 * @param array $talents
 	 */
-	public function __construct(string $id, object $herodata, object $gamestrings)
+	public function __construct(string $heroId, array $abilities, array $talents)
 	{
-		$this->id = $id;
+		$this->id        = $heroId;
+		$this->abilities = $abilities;
+		$this->talents   = $talents;
 	}
-	
+
 	/**
-	 * Returns the ID.
+	 * Returns the Abilities, optionally filtered by $unitId.
 	 *
-	 * @return string
+	 * @param string|null $unitId
+	 *
+	 * @return Ability[]
 	 */
-	public function id(): string
+	public function abilities(string $unitId = null): array
 	{
-		return $this->id;
+		if (is_null($unitId))
+		{
+			return $this->abilities;
+		}
+
+		$abilities = [];
+		foreach ($this->abilities as $ability)
+		{
+			if ($ability->unit() === $unitId)
+			{
+				$abilities[] = $ability;
+			}
+		}
+
+		return $abilities;
+	}
+
+	/**
+	 * Returns the Talents, optionally filtered by $levelId.
+	 *
+	 * @param int|null $level
+	 *
+	 * @return Talent[]
+	 */
+	public function talents(int $level = null): array
+	{
+		if (is_null($level))
+		{
+			return $this->talents;
+		}
+
+		$levelId = 'level' . (string) $level;
+		$talents = [];
+		foreach ($this->talents as $talent)
+		{
+			if ($talent->level() === $levelId)
+			{
+				$talents[] = $talent;
+			}
+		}
+
+		return $talents;
 	}
 }
