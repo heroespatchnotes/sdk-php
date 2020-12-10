@@ -16,7 +16,7 @@ use RuntimeException;
  */
 class DummyProvider extends BaseProvider
 {
-	use \Tatter\Heroes\Providers\ProviderTrait;
+	use \Tatter\Heroes\Traits\ProviderTrait;
 
 	/**
 	 * Verifies and stores a patch version.

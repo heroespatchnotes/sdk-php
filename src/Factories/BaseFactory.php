@@ -13,8 +13,7 @@ use IteratorAggregate;
  *
  * Common methods for factories.
  */
- */
-abstract class BaseFactory extends IteratorAggregate
+abstract class BaseFactory implements IteratorAggregate
 {
 	/**
 	 * Group to use for the Data Provider. Set by child.
@@ -29,7 +28,7 @@ abstract class BaseFactory extends IteratorAggregate
 	protected $data;
 
 	/**
-	 * @var GamestringProvider
+	 * @var StringProvider
 	 */
 	protected $strings;
 
@@ -41,7 +40,7 @@ abstract class BaseFactory extends IteratorAggregate
 	 */
 	public function __construct(string $locale = null, string $patch = null)
 	{
-		$this->data    = DataProvider::get(static::$group, $patch);
+		$this->data    = DataProvider::get($this->group, $patch);
 		$this->strings = StringProvider::get($locale ?? StringProvider::USA, $patch);
 	}
 }

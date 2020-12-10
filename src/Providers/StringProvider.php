@@ -18,7 +18,7 @@ use RuntimeException;
  */
 class StringProvider extends BaseProvider
 {
-	use ProviderTrait;
+	use \Tatter\Heroes\Traits\ProviderTrait;
 
 	/**
 	 * Locale Groups and Filenames

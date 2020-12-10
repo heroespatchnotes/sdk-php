@@ -18,6 +18,8 @@ use Traversable;
  */
 abstract class BaseProvider implements ProviderInterface
 {
+	use \Tatter\Heroes\Traits\GetterTrait;
+
 	/**
 	 * Array of shared instances, stored by
 	 * a hash of patch and group
@@ -51,13 +53,6 @@ abstract class BaseProvider implements ProviderInterface
 	 * @var string|null
 	 */
 	protected $source;
-
-	/**
-	 * The source file contents.
-	 *
-	 * @var object
-	 */
-	protected $contents;
 
 	//--------------------------------------------------------------------
 	
@@ -157,29 +152,5 @@ abstract class BaseProvider implements ProviderInterface
 	public function getContents(): object
 	{
 		return $this->contents;
-	}
-
-	//--------------------------------------------------------------------
-	// Magic Data Accessors
-	//--------------------------------------------------------------------
-
-	/**
-	 * @param string $name
-	 *
-	 * @return mixed
-	 */
-	public function __get(string $name)
-	{
-		return $this->contents->$name;
-	}
-
-	/**
-	 * @param string $name
-	 *
-	 * @return boolean
-	 */
-	public function __isset(string $name): bool
-	{
-		return property_exists($this->contents, $name);
 	}
 }
