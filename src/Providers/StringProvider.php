@@ -16,9 +16,9 @@ use RuntimeException;
  * locale-specific games strings from
  * Heroes Tool Chest.
  */
-class GamestringProvider extends BaseProvider
+class StringProvider extends BaseProvider
 {
-	use ProviderTrait;
+	use \Tatter\Heroes\Traits\ProviderTrait;
 
 	/**
 	 * Locale Groups and Filenames

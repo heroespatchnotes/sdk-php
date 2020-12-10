@@ -11,6 +11,6 @@ use IteratorAggregate;
  *
  * Method definitions for data provider classes.
  */
-interface ProviderInterface extends IteratorAggregate
+interface ProviderInterface
 {
 }

@@ -17,7 +17,7 @@ use RuntimeException;
  */
 class DataProvider extends BaseProvider
 {
-	use ProviderTrait;
+	use \Tatter\Heroes\Traits\ProviderTrait;
 
 	/**
 	 * Data Groups and Filenames

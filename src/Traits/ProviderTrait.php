@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tatter\Heroes\Providers;
+namespace Tatter\Heroes\Traits;
 
 use Tatter\Heroes\Interfaces\ProviderInterface;
 use Tatter\Heroes\Locator;
