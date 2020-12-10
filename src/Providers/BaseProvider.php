@@ -22,28 +22,28 @@ abstract class BaseProvider implements ProviderInterface
 	 * Array of shared instances, stored by
 	 * a hash of patch and group
 	 *
-	 * @var array<string,ProviderInterface>
+	 * @var array<string,static>
 	 */
-	private static $instances;
+	protected static $instances;
 
 	//--------------------------------------------------------------------
 
 	/**
 	 * @var string
 	 */
-	private $group;
+	protected $group;
 
 	/**
 	 * @var string
 	 */
-	private $patch;
+	protected $patch;
 
 	/**
 	 * Parsed metadata from .hdp.json
 	 *
 	 * @var object
 	 */
-	private $metaData;
+	protected $metaData;
 
 	/**
 	 * Path to the de-duplicated source file
@@ -58,48 +58,6 @@ abstract class BaseProvider implements ProviderInterface
 	 * @var object
 	 */
 	protected $contents;
-
-	//--------------------------------------------------------------------
-
-	/**
-	 * Returns a new/shared instance.
-	 *
-	 * @param string $group      The group
-	 * @param string|null $patch The patch version, or null to use latest
-	 *
-	 * @return ProviderInterface
-	 */
-	protected static function get(string $group, string $patch = null)
-	{
-		$patch = $patch ?? Locator::getLatest();
-		$hash  = $group . '_' . $patch;
-
-		if (! isset(self::$instances[$hash]))
-		{
-			self::$instances[$hash] = new static($group, $patch);
-		}
-
-		return self::$instances[$hash];
-	}
-
-	//--------------------------------------------------------------------
-	
-	/**
-	 * Stores the group and patch and loads the contents.
-	 *
-	 * @param string $group The group
-	 * @param string $patch The patch version
-	 *
-	 * @throws RuntimeException For missing file
-	 * @throws JsonException    For invalid file
-	 */
-	private function __construct(string $group, string $patch)
-	{
-		$this->setPatch($patch ?? Locator::getLatest());
-		$this->group = $group;
-
-		$this->contents = json_decode(file_get_contents($this->getSource()), false, JSON_THROW_ON_ERROR);
-	}
 
 	//--------------------------------------------------------------------
 	
