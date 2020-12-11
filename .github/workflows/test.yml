@@ -50,3 +50,13 @@ jobs:
 
       - name: Test with PHPUnit
         run: vendor/bin/phpunit --verbose --coverage-text
+
+  coveralls:
+    needs: [main]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
