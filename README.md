@@ -3,6 +3,7 @@ PHP SDK for Heroes of the Storm
 
 [![](https://github.com/tattersoftware/heroes-sdk-php/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/heroes-sdk-php/actions?query=workflow%3A%22PHPUnit)
 [![](https://github.com/tattersoftware/heroes-sdk-php/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/heroes-sdk-php/actions?query=workflow%3A%22PHPStan)
+[![Coverage Status](https://coveralls.io/repos/github/tattersoftware/heroes-sdk-php/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/heroes-sdk-php?branch=develop)
 
 ## Installation
 
