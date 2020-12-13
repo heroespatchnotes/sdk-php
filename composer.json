@@ -1,15 +1,16 @@
 {
-	"name": "tatter/heroes-sdk",
+	"name": "heroespatchnotes/sdk-php",
 	"description": "PHP SDK for Heroes of the Storm",
 	"keywords": [
 		"blizzard",
 		"heroes",
 		"storm",
 		"hots",
+		"gamedata",
 		"sdk",
 		"php"
 	],
-	"homepage": "https://github.com/tattersoftware/heroes-sdk-php",
+	"homepage": "https://github.com/heroespatchnotes/sdk-php",
 	"license": "MIT",
 	"authors": [
 		{
@@ -22,21 +23,20 @@
 	"repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/MGatner/heroes-data"
+            "url": "https://github.com/heroespatchnotes/heroes-data"
         }
 	],
 	"require": {
 		"php": "^7.3 || ^8.0",
-        "heroestoolchest/heroes-data": "dev-nexus"
+        "heroestoolchest/heroes-data": "dev-sdk-php"
 	},
 	"require-dev": {
-		"fakerphp/faker": "^1.9",
 		"phpstan/phpstan": "^0.12",
 		"phpunit/phpunit": "^9.0"
 	},
 	"autoload": {
 		"psr-4": {
-			"Tatter\\Heroes\\": "src"
+			"Heroes\\": "src"
 		}
 	},
 	"autoload-dev": {
