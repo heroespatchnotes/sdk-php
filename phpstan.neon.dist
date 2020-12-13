@@ -12,6 +12,6 @@ parameters:
 	universalObjectCratesClasses:
 		- Faker\Generator
 		- Tatter\Heroes\Entities\BaseEntity
-		- Tatter\Heroes\Interfaces\ProviderInterface
+		- Tatter\Heroes\Providers\BaseProvider
 	scanDirectories:
 	dynamicConstantNames:

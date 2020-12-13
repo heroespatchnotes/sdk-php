@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tatter\Heroes\Providers;
 
 use Tatter\Heroes\Locator;
-use Tatter\Heroes\Interfaces\ProviderInterface;
 use JsonException;
 use RuntimeException;
 
