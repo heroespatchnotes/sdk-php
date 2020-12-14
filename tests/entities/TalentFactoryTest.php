@@ -1,6 +1,6 @@
 <?php
 
-use Tatter\Heroes\Factories\TalentFactory;
+use Heroes\Factories\TalentFactory;
 use Tests\Support\TestCase;
 
 class TalentFactoryTest extends TestCase

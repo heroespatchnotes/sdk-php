@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tatter\Heroes\Providers;
+namespace Heroes\Providers;
 
-use Tatter\Heroes\Locator;
+use Heroes\Locator;
 use JsonException;
 use RuntimeException;
 
@@ -16,7 +16,7 @@ use RuntimeException;
  */
 class DataProvider extends BaseProvider
 {
-	use \Tatter\Heroes\Traits\ProviderTrait;
+	use \Heroes\Traits\ProviderTrait;
 
 	/**
 	 * Data Groups and Filenames

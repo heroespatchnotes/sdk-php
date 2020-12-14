@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tatter\Heroes;
+namespace Heroes;
 
 use Composer\Autoload\ClassLoader;
 use DirectoryIterator;

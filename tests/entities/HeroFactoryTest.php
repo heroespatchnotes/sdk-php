@@ -1,7 +1,7 @@
 <?php
 
-use Tatter\Heroes\Entities\Hero;
-use Tatter\Heroes\Factories\HeroFactory;
+use Heroes\Entities\Hero;
+use Heroes\Factories\HeroFactory;
 use Tests\Support\TestCase;
 
 class HeroFactoryTest extends TestCase

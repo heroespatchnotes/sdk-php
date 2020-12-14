@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tatter\Heroes\Factories;
+namespace Heroes\Factories;
 
-use Tatter\Heroes\Providers\DataProvider;
-use Tatter\Heroes\Providers\StringProvider;
+use Heroes\Providers\DataProvider;
+use Heroes\Providers\StringProvider;
 use IteratorAggregate;
 
 /**

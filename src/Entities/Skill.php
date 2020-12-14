@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tatter\Heroes\Entities;
+namespace Heroes\Entities;
 
-use Tatter\Heroes\Providers\DataProvider;
-use Tatter\Heroes\Providers\GamestringProvider;
+use Heroes\Providers\DataProvider;
+use Heroes\Providers\GamestringProvider;
 use RuntimeException;
 
 /**

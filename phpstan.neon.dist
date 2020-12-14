@@ -11,7 +11,7 @@ parameters:
 		- '#Unsafe usage of new static\(\)#'
 	universalObjectCratesClasses:
 		- Faker\Generator
-		- Tatter\Heroes\Entities\BaseEntity
-		- Tatter\Heroes\Providers\BaseProvider
+		- Heroes\Entities\BaseEntity
+		- Heroes\Providers\BaseProvider
 	scanDirectories:
 	dynamicConstantNames:

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tatter\Heroes\Traits;
+namespace Heroes\Traits;
 
-use Tatter\Heroes\Locator;
+use Heroes\Locator;
 use JsonException;
 use RuntimeException;
 

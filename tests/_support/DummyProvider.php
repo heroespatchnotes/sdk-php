@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Support;
 
-use Tatter\Heroes\Locator;
-use Tatter\Heroes\Providers\BaseProvider;
+use Heroes\Locator;
+use Heroes\Providers\BaseProvider;
 use JsonException;
 use RuntimeException;
 
@@ -16,7 +16,7 @@ use RuntimeException;
  */
 class DummyProvider extends BaseProvider
 {
-	use \Tatter\Heroes\Traits\ProviderTrait;
+	use \Heroes\Traits\ProviderTrait;
 
 	/**
 	 * Verifies and stores a patch version.

@@ -1,6 +1,6 @@
 <?php
 
-use Tatter\Heroes\Providers\DataProvider;
+use Heroes\Providers\DataProvider;
 use Tests\Support\TestCase;
 
 class DataProviderTest extends TestCase

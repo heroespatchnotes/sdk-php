@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tatter\Heroes\Traits;
+namespace Heroes\Traits;
 
 /**
  * Getter Trait

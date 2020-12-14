@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tatter\Heroes\Factories;
+namespace Heroes\Factories;
 
-use Tatter\Heroes\Entities\Hero;
-use Tatter\Heroes\Providers\DataProvider;
+use Heroes\Entities\Hero;
+use Heroes\Providers\DataProvider;
 use ArrayIterator;
 use Traversable;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tatter\Heroes\Entities;
+namespace Heroes\Entities;
 
 /**
  * Talent Entity
