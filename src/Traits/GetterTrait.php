@@ -2,12 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tatter\Heroes\Traits;
-
-use Tatter\Heroes\Interfaces\ProviderInterface;
-use Tatter\Heroes\Locator;
-use JsonException;
-use RuntimeException;
+namespace Heroes\Traits;
 
 /**
  * Getter Trait

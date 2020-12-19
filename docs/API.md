@@ -1,5 +1,10 @@
 # API Docs
 
+* [Locator Class](#locator-class)
+* [Provider Classes](#provider-classes)
+* [Factories](#factories)
+* [Entities](#entities)
+
 ## Locator Class
 
 > Locates repository data dynamically from Composer's own directory structure.

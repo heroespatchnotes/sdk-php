@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tatter\Heroes\Providers;
+namespace Heroes\Providers;
 
-use Tatter\Heroes\Interfaces\ProviderInterface;
-use Tatter\Heroes\Locator;
+use Heroes\Locator;
 use JsonException;
 use RuntimeException;
 use Traversable;
@@ -16,9 +15,9 @@ use Traversable;
  * Common methods for dealing with provider
  * sources.
  */
-abstract class BaseProvider implements ProviderInterface
+abstract class BaseProvider
 {
-	use \Tatter\Heroes\Traits\GetterTrait;
+	use \Heroes\Traits\GetterTrait;
 
 	/**
 	 * Array of shared instances, stored by

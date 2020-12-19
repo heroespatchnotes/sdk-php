@@ -129,5 +129,4 @@ foreach ($tassadar->abilities() as $ability)
 }
 ```
 
-> Note: See the API docs for details on each `Entity`.
-
+> Note: See the [API docs](docs/API.md) for details on each `Entity`.

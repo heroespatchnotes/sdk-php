@@ -1,6 +1,6 @@
 <?php
 
-use Tatter\Heroes\Locator;
+use Heroes\Locator;
 use Tests\Support\TestCase;
 
 class DataTest extends TestCase
