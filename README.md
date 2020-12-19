@@ -1,17 +1,17 @@
-# Tatter\Heroes
+# Heroes SDK
 PHP SDK for Heroes of the Storm
 
-[![](https://github.com/tattersoftware/heroes-sdk-php/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/heroes-sdk-php/actions?query=workflow%3A%22PHPUnit)
-[![](https://github.com/tattersoftware/heroes-sdk-php/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/heroes-sdk-php/actions?query=workflow%3A%22PHPStan)
-[![Coverage Status](https://coveralls.io/repos/github/tattersoftware/heroes-sdk-php/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/heroes-sdk-php?branch=develop)
+[![](https://github.com/heroespatchnotes/sdk-php/workflows/PHPUnit/badge.svg)](https://github.com/heroespatchnotes/sdk-php/actions?query=workflow%3A%22PHPUnit)
+[![](https://github.com/heroespatchnotes/sdk-php/workflows/PHPStan/badge.svg)](https://github.com/heroespatchnotes/sdk-php/actions?query=workflow%3A%22PHPStan)
+[![Coverage Status](https://coveralls.io/repos/github/heroespatchnotes/sdk-php/badge.svg?branch=develop)](https://coveralls.io/github/heroespatchnotes/sdk-php?branch=develop)
 
 ## Installation
 
-Install with Composer: `> composer require tatter/heroes-sdk`
+Install with Composer: `> composer require heroespatchnotes/sdk`
 
 ## Description
 
-`Tatter\Heroes` is an SDK written in PHP to facilitate access to community resources for
+`Heroes` is an SDK written in PHP to facilitate access to community resources for
 Blizzard's MOBA, **Heroes of the Storm**.
 
 ## Game Data
