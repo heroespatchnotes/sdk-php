@@ -7,7 +7,16 @@ PHP SDK for Heroes of the Storm
 
 ## Installation
 
-Install with Composer: `> composer require heroespatchnotes/sdk`
+1. Add the `heroes-data` repository to your **composer.json**, e.g.:
+```
+	"repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/heroespatchnotes/heroes-data"
+		}
+	],
+```
+2. Install with Composer: `> composer require heroespatchnotes/sdk`
 
 ## Description
 
