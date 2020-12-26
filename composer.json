@@ -28,7 +28,7 @@
 	],
 	"require": {
 		"php": "^7.3 || ^8.0",
-        "heroestoolchest/heroes-data": "dev-sdk"
+        "heroestoolchest/heroes-data": "dev-master"
 	},
 	"require-dev": {
 		"phpstan/phpstan": "^0.12",
