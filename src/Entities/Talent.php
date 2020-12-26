@@ -20,12 +20,14 @@ class Talent extends Skill
 	 * @param string $heroId
 	 * @param string $levelId
 	 * @param object $contents Data from Provider for a single Talent
+	 * @param array<string,string> $strings Relevant game Strings from Provider
 	 */
-	public function __construct(string $heroId, string $levelId, object $contents)
+	public function __construct(string $heroId, string $levelId, object $contents, array $strings)
 	{
 		$this->heroId   = $heroId;
 		$this->levelId  = $levelId;
 		$this->contents = $contents;
+		$this->strings  = $strings;
 	}
 
 	/**

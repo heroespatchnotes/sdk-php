@@ -28,4 +28,19 @@ class HeroFactoryTest extends TestCase
 
 		$this->assertEquals('Abathur', $result->id());
 	}
+
+	public function testPassesStrings()
+	{
+		$hero = $this->heroes->get('Abathur');
+
+		foreach ([
+			'description',
+			'difficulty',
+			'name',
+			'role',
+		] as $key)
+		{
+			$this->assertIsString($hero->string($key));
+		}
+	}
 }

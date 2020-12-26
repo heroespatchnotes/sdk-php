@@ -30,12 +30,14 @@ class Hero extends BaseEntity
 	 * @param string $heroId
 	 * @param array $abilities
 	 * @param array $talents
+	 * @param array<string,string> $strings
 	 */
-	public function __construct(string $heroId, array $abilities, array $talents)
+	public function __construct(string $heroId, array $abilities, array $talents, array $strings)
 	{
 		$this->id        = $heroId;
 		$this->abilities = $abilities;
 		$this->talents   = $talents;
+		$this->strings   = $strings;
 	}
 
 	/**

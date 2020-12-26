@@ -331,3 +331,17 @@ Example:
 echo $hero->id();
 // "Abathur";
 ```
+
+### string()
+
+Returns the corresponding game String named `$key`.
+
+* **Parameters:** **$key** `string` The key to the game String.
+* **Returns:** A unique ID that varies by each Entity
+* **Return type:** `string`
+
+Example:
+```
+echo $abathur->string('description');
+// "A unique Hero that can manipulate the battle from anywhere on the map.";
+```

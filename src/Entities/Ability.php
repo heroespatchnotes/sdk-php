@@ -32,14 +32,16 @@ class Ability extends Skill
 	 * @param string $type
 	 * @param bool $sub
 	 * @param object $contents Data from Provider for a single Ability
+	 * @param array<string,string> $strings Relevant game Strings from Provider
 	 */
-	public function __construct(string $heroId, string $unitId, string $type, bool $sub, object $contents)
+	public function __construct(string $heroId, string $unitId, string $type, bool $sub, object $contents, array $strings)
 	{
 		$this->heroId   = $heroId;
 		$this->unitId   = $unitId;
 		$this->type     = $type;
 		$this->sub      = $sub;
 		$this->contents = $contents;
+		$this->strings  = $strings;
 	}
 
 	/**

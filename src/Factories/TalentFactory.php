@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Heroes\Factories;
 
+use Heroes\Entities\Skill;
 use Heroes\Entities\Talent;
 use Heroes\Providers\DataProvider;
 use ArrayIterator;
@@ -32,9 +33,10 @@ class TalentFactory extends SkillFactory
 		{
 			foreach ($collection as $contents)
 			{
-				$this->injectStrings($contents);
+				$skillId = Skill::createId($contents);
+				$strings = $this->getStrings($skillId);
 
-				$talents[] = new Talent($heroId, $levelId, $contents);
+				$talents[] = new Talent($heroId, $levelId, $contents, $strings);
 			}
 		}
 

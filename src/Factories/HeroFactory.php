@@ -25,6 +25,34 @@ class HeroFactory extends BaseFactory
 	protected $group = DataProvider::HERO;
 
 	/**
+	 * Path to the Entity's game Strings. Set by child.
+	 *
+	 * @var string
+	 */
+	protected $stringsPath = 'unit';
+
+	/**
+	 * Keys to check for Entity game Strings. Set by child.
+	 *
+	 * @var string[]
+	 */
+	protected $stringsKeys = [
+		'damagetype',
+		'description',
+		'difficulty',
+		'energytype',
+		'expandedrole',
+		'infotext',
+		'lifetype',
+		'name',
+		'role',
+		'searchtext',
+		'shieldtype',
+		'title',
+		'type',
+	];
+
+	/**
 	 * Returns a hero identified by $heroId
 	 *
 	 * @param string $heroId
@@ -37,9 +65,8 @@ class HeroFactory extends BaseFactory
 		$abilities = new AbilityFactory($this->strings->getGroup(), $this->data->getPatch());
 		$talents   = new TalentFactory($this->strings->getGroup(), $this->data->getPatch());
 
-		return new Hero($heroId, $abilities->hero($heroId), $talents->hero($heroId));
+		return new Hero($heroId, $abilities->hero($heroId), $talents->hero($heroId), $this->getStrings($heroId));
 	}
-
 	/**
 	 * Returns an iterable version of all Heroes.
 	 *

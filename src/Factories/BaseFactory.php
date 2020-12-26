@@ -23,6 +23,20 @@ abstract class BaseFactory implements IteratorAggregate
 	protected $group;
 
 	/**
+	 * Path to the Entity's game Strings. Set by child.
+	 *
+	 * @var string
+	 */
+	protected $stringsPath;
+
+	/**
+	 * Keys to check for Entity game Strings. Set by child.
+	 *
+	 * @var string[]
+	 */
+	protected $stringsKeys;
+
+	/**
 	 * @var DataProvider
 	 */
 	protected $data;
@@ -42,5 +56,29 @@ abstract class BaseFactory implements IteratorAggregate
 	{
 		$this->data    = DataProvider::get($this->group, $patch);
 		$this->strings = StringProvider::get($locale ?? StringProvider::USA, $patch);
+	}
+
+	/**
+	 * Searches StringProvider for relevant strings
+	 * to pass to the Entity.
+	 *
+	 * @param string $id Equivalent of Skill::id()
+	 *
+	 * @return array<string,string>
+	 */
+	protected function getStrings(string $id): array
+	{
+		// Harvest the relevant strings
+		$path    = $this->stringsPath;
+		$strings = [];
+		foreach ($this->stringsKeys as $key)
+		{
+			if (isset($this->strings->gamestrings->$path->$key->$id))
+			{
+				$strings[$key] = $this->strings->gamestrings->$path->$key->$id;
+			}
+		}
+
+		return $strings;
 	}
 }

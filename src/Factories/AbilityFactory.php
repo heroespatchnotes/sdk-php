@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Heroes\Factories;
 
 use Heroes\Entities\Ability;
+use Heroes\Entities\Skill;
 use Heroes\Providers\DataProvider;
 use ArrayIterator;
 use Traversable;
@@ -63,9 +64,10 @@ class AbilityFactory extends SkillFactory
 		{
 			foreach ($collection as $contents)
 			{
-				$this->injectStrings($contents);
+				$skillId = Skill::createId($contents);
+				$strings = $this->getStrings($skillId);
 
-				$abilities[] = new Ability($heroId, $unitId, $type, false, $contents);
+				$abilities[] = new Ability($heroId, $unitId, $type, false, $contents, $strings);
 			}
 		}
 
@@ -80,10 +82,10 @@ class AbilityFactory extends SkillFactory
 					{
 						foreach ($collection as $contents)
 						{
+							$skillId = Skill::createId($contents);
+							$strings = $this->getStrings($skillId);
 
-							$this->injectStrings($contents);
-
-							$abilities[] = new Ability($heroId, $unitId, $type, true, $contents);
+							$abilities[] = new Ability($heroId, $unitId, $type, true, $contents, $strings);
 						}
 					}
 				}

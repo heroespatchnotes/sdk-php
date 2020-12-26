@@ -25,27 +25,23 @@ abstract class SkillFactory extends BaseFactory
 	protected $group = DataProvider::HERO;
 
 	/**
-	 * Searches StringProvider for relevant strings
-	 * and adds them to the contents.
+	 * Path to the Entity's game Strings. Set by child.
 	 *
-	 * @param object $contents
-	 *
-	 * @return void
+	 * @var string
 	 */
-	protected function injectStrings(object &$contents): void
-	{
-		// Harvest the relevant strings
-		$skillId = Skill::createId($contents);
-		$strings = [];
-		foreach (['full', 'name', 'short', 'cooldown'] as $key)
-		{
-			if (isset($this->strings->gamestrings->abiltalent->$key->$skillId))
-			{
-				// Add them to the contents
-				$contents->$key = $this->strings->gamestrings->abiltalent->$key->$skillId;
-			}
-		}
-	}
+	protected $stringsPath = 'abiltalent';
+
+	/**
+	 * Keys to check for Entity game Strings. Set by child.
+	 *
+	 * @var string[]
+	 */
+	protected $stringsKeys = [
+		'full',
+		'name',
+		'short',
+		'cooldown',
+	];
 
 	/**
 	 * Returns a Hero's Skills
