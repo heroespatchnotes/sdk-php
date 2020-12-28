@@ -2,6 +2,8 @@
 
 ## [Unreleased](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.2...develop)
 
+- `StringProvider` locale constants have been moved to a single array constant, `LOCALE`
+
 ## [v0.9-beta.2 (2020-12-26)](https://github.com/laravel/laravel/compare/v0.9-beta.1...v0.9-beta.2)
 
 ### Added

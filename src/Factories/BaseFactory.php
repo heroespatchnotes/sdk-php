@@ -55,7 +55,7 @@ abstract class BaseFactory implements IteratorAggregate
 	public function __construct(string $locale = null, string $patch = null)
 	{
 		$this->data    = DataProvider::get($this->group, $patch);
-		$this->strings = StringProvider::get($locale ?? StringProvider::USA, $patch);
+		$this->strings = StringProvider::get($locale ?? StringProvider::LOCALE['USA'], $patch);
 	}
 
 	/**
