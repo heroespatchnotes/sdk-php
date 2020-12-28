@@ -7,7 +7,7 @@ class GamestringTest extends TestCase
 {
 	public function testToString()
 	{
-		$content = 'string <c val=\"bfd4fd\">350~~0.04~~</c>';
+		$content = 'string <c val="bfd4fd">350~~0.04~~</c>';
 
 		$gamestring = new Gamestring($content);
 
@@ -16,8 +16,8 @@ class GamestringTest extends TestCase
 
 	public function testWithScalingDefault()
 	{
-		$content  = 'string <c val=\"bfd4fd\">350~~0.04~~</c>';
-		$expected = 'string <c val=\"bfd4fd\">350 (+4% per level)</c>';
+		$content  = 'string <c val="bfd4fd">350~~0.04~~</c>';
+		$expected = 'string <c val="bfd4fd">350 (+4% per level)</c>';
 
 		$gamestring = (new Gamestring($content))->withScaling();
 
@@ -26,8 +26,8 @@ class GamestringTest extends TestCase
 
 	public function testWithScalingMultiple()
 	{
-		$content  = 'string <c val=\"bfd4fd\">350~~0.04~~</c> <c val=\"bfd4fd\">150~~0.05~~</c>';
-		$expected = 'string <c val=\"bfd4fd\">350 (+4% per level)</c> <c val=\"bfd4fd\">150 (+5% per level)</c>';
+		$content  = 'string <c val="bfd4fd">350~~0.04~~</c> <c val="bfd4fd">150~~0.05~~</c>';
+		$expected = 'string <c val="bfd4fd">350 (+4% per level)</c> <c val="bfd4fd">150 (+5% per level)</c>';
 
 		$gamestring = (new Gamestring($content))->withScaling();
 
@@ -36,8 +36,8 @@ class GamestringTest extends TestCase
 
 	public function testWithScalingWithFormat()
 	{
-		$content  = 'string <c val=\"bfd4fd\">350~~0.04~~</c>';
-		$expected = 'string <c val=\"bfd4fd\">350+4%</c>';
+		$content  = 'string <c val="bfd4fd">350~~0.04~~</c>';
+		$expected = 'string <c val="bfd4fd">350+4%</c>';
 
 		$gamestring = (new Gamestring($content))->withScaling('+%g%%');
 
@@ -49,8 +49,8 @@ class GamestringTest extends TestCase
 	 */
 	public function testWithLevel($level, $scaled)
 	{
-		$content  = 'string <c val=\"bfd4fd\">350~~0.04~~</c>';
-		$expected = 'string <c val=\"bfd4fd\">' . $scaled . '</c>';
+		$content  = 'string <c val="bfd4fd">350~~0.04~~</c>';
+		$expected = 'string <c val="bfd4fd">' . $scaled . '</c>';
 
 		$gamestring = (new Gamestring($content))->withLevel($level);
 
@@ -70,9 +70,19 @@ class GamestringTest extends TestCase
 		];
 	}
 
+	public function testWithoutTags()
+	{
+		$content  = 'string<n/><n/><c val="bfd4fd">350~~0.04~~</c>';
+		$expected = 'string  350~~0.04~~';
+
+		$gamestring = (new Gamestring($content))->withoutTags();
+
+		$this->assertEquals($expected, (string) $gamestring);
+	}
+
 	public function testWithoutTag()
 	{
-		$content  = 'string <c val=\"bfd4fd\">350~~0.04~~</c>';
+		$content  = 'string <c val="bfd4fd">350~~0.04~~</c>';
 		$expected = 'string 350~~0.04~~';
 
 		$gamestring = (new Gamestring($content))->withoutTag('<c>');
@@ -82,8 +92,8 @@ class GamestringTest extends TestCase
 
 	public function testWithoutTagUnmatched()
 	{
-		$content  = 'string <c val=\"bfd4fd\">350~~0.04~~</c>';
-		$expected = 'string <c val=\"bfd4fd\">350~~0.04~~</c>';
+		$content  = 'string <c val="bfd4fd">350~~0.04~~</c>';
+		$expected = 'string <c val="bfd4fd">350~~0.04~~</c>';
 
 		$gamestring = (new Gamestring($content))->withoutTag('<x>');
 
@@ -92,20 +102,50 @@ class GamestringTest extends TestCase
 
 	public function testWithoutColor()
 	{
-		$content  = 'string <c val=\"bfd4fd\">350~~0.04~~</c>';
+		$content  = 'string <c val="bfd4fd">350~~0.04~~</c>';
 		$expected = 'string 350~~0.04~~';
 
-		$gamestring = (new Gamestring($content))->withoutTag('<c>');
+		$gamestring = (new Gamestring($content))->withoutColor();
 
 		$this->assertEquals($expected, (string) $gamestring);
 	}
 
-	public function testWithoutTags()
+	public function testWithoutImage()
 	{
-		$content  = 'string<n/><n/><c val=\"bfd4fd\">350~~0.04~~</c>';
-		$expected = 'string350~~0.04~~';
+		$content  = 'string <img path="@UI/StormTalentInTextArmorIcon" alignment="uppermiddle" color="BBBBBB" width="20" height="22"/>';
+		$expected = 'string ';
 
-		$gamestring = (new Gamestring($content))->withoutTags();
+		$gamestring = (new Gamestring($content))->withoutImage();
+
+		$this->assertEquals($expected, (string) $gamestring);
+	}
+
+	public function testWithoutStandard()
+	{
+		$content  = 'string <s val="bfd4fd" name="StandardTooltipDetails">Mana: 50</s>';
+		$expected = 'string Mana: 50';
+
+		$gamestring = (new Gamestring($content))->withoutStandard();
+
+		$this->assertEquals($expected, (string) $gamestring);
+	}
+
+	public function testWithoutNewlineDefault()
+	{
+		$content  = 'string<n/><n/>350~~0.04~~';
+		$expected = 'string  350~~0.04~~';
+
+		$gamestring = (new Gamestring($content))->withoutNewline();
+
+		$this->assertEquals($expected, (string) $gamestring);
+	}
+
+	public function testWithoutNewlineWithFormat()
+	{
+		$content  = 'string<n/><n/>350~~0.04~~';
+		$expected = 'string__350~~0.04~~';
+
+		$gamestring = (new Gamestring($content))->withoutNewline('_');
 
 		$this->assertEquals($expected, (string) $gamestring);
 	}

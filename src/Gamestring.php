@@ -9,7 +9,7 @@ namespace Heroes;
  *
  * A string wrapper to handle special characters
  * and tags in data from StringProviders.
- * All "with" methods must be idempotent.
+ * All "with/without" methods must be idempotent.
  */
 final class Gamestring
 {
@@ -160,19 +160,57 @@ final class Gamestring
 	 */
 	public function withoutTags(): self
 	{
-		return new self(strip_tags($this->content));
+		return $this->withoutColor()
+			->withoutImage()
+			->withoutStandard()
+			->withoutNewline();
 	}
 
 	/**
 	 * Removes color tags leaving the content, e.g.
-	 * <c val=\"bfd4fd\">0.75</c>
-	 *
-	 * @param string $format The format to use
+	 * <c val="bfd4fd">0.75</c>
 	 *
 	 * @return self
 	 */
 	public function withoutColor(): self
 	{
-		return $this->withouTag('<c>');
+		return $this->withoutTag('<c>');
+	}
+
+	/**
+	 * Removes image tags, e.g.
+	 * <img path="@UI/StormTalentInTextArmorIcon" alignment="uppermiddle" color="BBBBBB" width="20" height="22"/>
+	 *
+	 * @return self
+	 */
+	public function withoutImage(): self
+	{
+		return $this->withoutTag('<img>');
+	}
+
+	/**
+	 * Removes <s> tags leaving the content, e.g.
+	 * <s val="bfd4fd" name="StandardTooltipDetails">Mana: 50</s>
+	 *
+	 * @return self
+	 */
+	public function withoutStandard(): self
+	{
+		return $this->withoutTag('<s>');
+	}
+
+	/**
+	 * Removes newline tags, replacing them with $replace, e.g.
+	 * Cooldown: 1 second<n/>Consumes all Combo Points
+	 *
+	 * @param string $replace String to use as a replacement
+	 *
+	 * @return self
+	 */
+	public function withoutNewline(string $replace = ' '): self
+	{
+		$content = str_replace('<n/>', $replace, $this->content);
+
+		return new self($content);
 	}
 }
