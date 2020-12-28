@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Heroes\Entities;
 
 use Heroes\Entities\Hero;
+use Heroes\Gamestring;
 use Heroes\Providers\DataProvider;
 use Heroes\Providers\GamestringProvider;
 use RuntimeException;
@@ -30,7 +31,7 @@ class Hero extends BaseEntity
 	 * @param string $heroId
 	 * @param array $abilities
 	 * @param array $talents
-	 * @param array<string,string> $strings
+	 * @param array<string,Gamestring> $strings
 	 */
 	public function __construct(string $heroId, array $abilities, array $talents, array $strings)
 	{

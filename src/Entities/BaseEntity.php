@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Heroes\Entities;
 
+use Heroes\Gamestring;
+
 /**
  * Base Entity
  */
@@ -19,7 +21,7 @@ abstract class BaseEntity
 	/**
 	 * Array of selected game Strings
 	 *
-	 * @var array<string,string>
+	 * @var array<string,Gamestring>
 	 */
 	protected $strings;
 
@@ -34,13 +36,13 @@ abstract class BaseEntity
 	}
 
 	/**
-	 * Returns a String by its name.
+	 * Returns a Gamestring by its name.
 	 *
 	 * @param string $key
 	 *
-	 * @return string
+	 * @return Gamestring
 	 */
-	public function string(string $key): string
+	public function string(string $key): Gamestring
 	{
 		return $this->strings[$key];
 	}

@@ -31,22 +31,6 @@ final class Gamestring
 	private $content;
 
 	/**
-	 * Level to apply for scaling, e.g.
-	 * "Fires a laser that deals 296 damage"
-	 *
-	 * @var int|null
-	 */
-	private $level;
-
-	/**
-	 * Whether to include scaling info, e.g.
-	 * "Fires a laser that deals 200 (+4% per level) damage"
-	 *
-	 * @var bool
-	 */
-	private $scaling;
-
-	/**
 	 * Stores the string
 	 *
 	 * @param string $content

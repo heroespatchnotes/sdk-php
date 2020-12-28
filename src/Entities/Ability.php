@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Heroes\Entities;
 
+use Heroes\Gamestring;
+
 /**
  * Ability Entity
  */
@@ -32,7 +34,7 @@ class Ability extends Skill
 	 * @param string $type
 	 * @param bool $sub
 	 * @param object $contents Data from Provider for a single Ability
-	 * @param array<string,string> $strings Relevant game Strings from Provider
+	 * @param array<string,Gamestring> $strings Relevant Gamestrings from Provider
 	 */
 	public function __construct(string $heroId, string $unitId, string $type, bool $sub, object $contents, array $strings)
 	{

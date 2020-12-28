@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Heroes\Factories;
 
+use Heroes\Gamestring;
 use Heroes\Providers\DataProvider;
 use Heroes\Providers\StringProvider;
 use IteratorAggregate;
@@ -59,12 +60,12 @@ abstract class BaseFactory implements IteratorAggregate
 	}
 
 	/**
-	 * Searches StringProvider for relevant strings
+	 * Searches StringProvider for relevant Gamestrings
 	 * to pass to the Entity.
 	 *
 	 * @param string $id Equivalent of Skill::id()
 	 *
-	 * @return array<string,string>
+	 * @return array<string,Gamestring>
 	 */
 	protected function getStrings(string $id): array
 	{
@@ -75,7 +76,7 @@ abstract class BaseFactory implements IteratorAggregate
 		{
 			if (isset($this->strings->gamestrings->$path->$key->$id))
 			{
-				$strings[$key] = $this->strings->gamestrings->$path->$key->$id;
+				$strings[$key] = new Gamestring($this->strings->gamestrings->$path->$key->$id);
 			}
 		}
 
