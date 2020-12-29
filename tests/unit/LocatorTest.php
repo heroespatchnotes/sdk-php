@@ -3,7 +3,7 @@
 use Heroes\Locator;
 use Tests\Support\TestCase;
 
-class DataTest extends TestCase
+class LocatorTest extends TestCase
 {
 	/**
 	 * Runs a raw sanity check to ensure proper installation

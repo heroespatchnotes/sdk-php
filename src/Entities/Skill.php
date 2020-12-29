@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Heroes\Entities;
 
+use Heroes\Gamestring;
 use Heroes\Providers\DataProvider;
 use Heroes\Providers\GamestringProvider;
 use RuntimeException;

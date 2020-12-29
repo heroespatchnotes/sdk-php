@@ -2,6 +2,7 @@
 
 use Heroes\Entities\Hero;
 use Heroes\Factories\HeroFactory;
+use Heroes\Gamestring;
 use Tests\Support\TestCase;
 
 class HeroFactoryTest extends TestCase
@@ -40,7 +41,7 @@ class HeroFactoryTest extends TestCase
 			'role',
 		] as $key)
 		{
-			$this->assertIsString($hero->string($key));
+			$this->assertInstanceOf(Gamestring::class, $hero->string($key));
 		}
 	}
 }

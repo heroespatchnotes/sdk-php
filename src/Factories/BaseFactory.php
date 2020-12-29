@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Heroes\Factories;
 
+use Heroes\Gamestring;
 use Heroes\Providers\DataProvider;
 use Heroes\Providers\StringProvider;
 use IteratorAggregate;
@@ -27,14 +28,7 @@ abstract class BaseFactory implements IteratorAggregate
 	 *
 	 * @var string
 	 */
-	protected $stringsPath;
-
-	/**
-	 * Keys to check for Entity game Strings. Set by child.
-	 *
-	 * @var string[]
-	 */
-	protected $stringsKeys;
+	protected $subGroup;
 
 	/**
 	 * @var DataProvider
@@ -55,27 +49,26 @@ abstract class BaseFactory implements IteratorAggregate
 	public function __construct(string $locale = null, string $patch = null)
 	{
 		$this->data    = DataProvider::get($this->group, $patch);
-		$this->strings = StringProvider::get($locale ?? StringProvider::USA, $patch);
+		$this->strings = StringProvider::get($locale ?? StringProvider::LOCALE['USA'], $patch);
 	}
 
 	/**
-	 * Searches StringProvider for relevant strings
+	 * Searches StringProvider for relevant Gamestrings
 	 * to pass to the Entity.
 	 *
 	 * @param string $id Equivalent of Skill::id()
 	 *
-	 * @return array<string,string>
+	 * @return array<string,Gamestring>
 	 */
 	protected function getStrings(string $id): array
 	{
 		// Harvest the relevant strings
-		$path    = $this->stringsPath;
 		$strings = [];
-		foreach ($this->stringsKeys as $key)
+		foreach ($this->strings->gamestrings->{$this->subGroup} as $key => $contents)
 		{
-			if (isset($this->strings->gamestrings->$path->$key->$id))
+			if (isset($contents->$id))
 			{
-				$strings[$key] = $this->strings->gamestrings->$path->$key->$id;
+				$strings[$key] = new Gamestring($contents->$id);
 			}
 		}
 

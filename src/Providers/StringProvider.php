@@ -22,18 +22,20 @@ class StringProvider extends BaseProvider
 	/**
 	 * Locale Groups and Filenames
 	 */
-	const GERMANY = 'dede';
-	const USA     = 'enus';
-	const SPAIN   = 'eses';
-	const MEXICO  = 'esmx';
-	const FRANCE  = 'frfr';
-	const ITALY   = 'itit';
-	const KOREA   = 'kokr';
-	const POLAND  = 'plpl';
-	const BRAZIL  = 'ptbr';
-	const RUSSIA  = 'ruru';
-	const CHINA   = 'zhcn';
-	const TAIWAN  = 'zhtw';
+	const LOCALE = [
+		'Germany' => 'dede',
+		'USA'     => 'enus',
+		'Spain'   => 'eses',
+		'Mexico'  => 'esmx',
+		'France'  => 'frfr',
+		'Italy'   => 'itit',
+		'Korea'   => 'kokr',
+		'Poland'  => 'plpl',
+		'Brazil'  => 'ptbr',
+		'Russia'  => 'ruru',
+		'China'   => 'zhcn',
+		'Taiwan'  => 'zhtw',
+	];
 
 	/**
 	 * Returns the pattern used to locate the source

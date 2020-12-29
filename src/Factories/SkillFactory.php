@@ -25,23 +25,11 @@ abstract class SkillFactory extends BaseFactory
 	protected $group = DataProvider::HERO;
 
 	/**
-	 * Path to the Entity's game Strings. Set by child.
+	 * Path to the Entity's game Strings.
 	 *
 	 * @var string
 	 */
-	protected $stringsPath = 'abiltalent';
-
-	/**
-	 * Keys to check for Entity game Strings. Set by child.
-	 *
-	 * @var string[]
-	 */
-	protected $stringsKeys = [
-		'full',
-		'name',
-		'short',
-		'cooldown',
-	];
+	protected $subGroup = 'abiltalent';
 
 	/**
 	 * Returns a Hero's Skills

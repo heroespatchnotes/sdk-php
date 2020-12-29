@@ -2,6 +2,7 @@
 
 * [Locator Class](#locator-class)
 * [Provider Classes](#provider-classes)
+* [Gamestring Class](#gamestring)
 * [Factories](#factories)
 * [Entities](#entities)
 
@@ -222,18 +223,166 @@ const VOICELINE         = 'voiceline';
 
 ### StringProvider
 ```
-const GERMANY = 'dede';
-const USA     = 'enus';
-const SPAIN   = 'eses';
-const MEXICO  = 'esmx';
-const FRANCE  = 'frfr';
-const ITALY   = 'itit';
-const KOREA   = 'kokr';
-const POLAND  = 'plpl';
-const BRAZIL  = 'ptbr';
-const RUSSIA  = 'ruru';
-const CHINA   = 'zhcn';
-const TAIWAN  = 'zhtw';
+const LOCALE = [
+	'Germany' => 'dede',
+	'USA'     => 'enus',
+	'Spain'   => 'eses',
+	'Mexico'  => 'esmx',
+	'France'  => 'frfr',
+	'Italy'   => 'itit',
+	'Korea'   => 'kokr',
+	'Poland'  => 'plpl',
+	'Brazil'  => 'ptbr',
+	'Russia'  => 'ruru',
+	'China'   => 'zhcn',
+	'Taiwan'  => 'zhtw',
+];
+```
+
+## Gamestring
+
+> Gamestrings are string wrappers with built-in methods to assist with output formatting.
+> This class is immutable and all methods are idempotent.
+
+### __construct()
+
+Creates a new Gamestring. Usually called by the `Entity`'s `Factory`
+
+* **Parameters:** **$content** `string` The string for this class to wrap
+
+Example:
+```
+$gamestring = new Gamestring('<s val="bfd4fd" name="StandardTooltipDetails">Mana: 30</s>');
+```
+
+### __toString()
+
+Returns the contents directly as a string.
+
+* **Returns:** Raw string contents
+* **Return type:** `string`
+
+Example:
+```
+echo $gamestring;
+// '<s val="bfd4fd" name="StandardTooltipDetails">Mana: 30</s>'
+```
+
+### asRaw()
+
+Returns the contents directly as a string.
+
+* **Returns:** Raw string contents
+* **Return type:** `string`
+
+Example:
+```
+echo $gamestring->asRaw();
+// '<s val="bfd4fd" name="StandardTooltipDetails">Mana: 30</s>'
+```
+
+### asHtml()
+
+Returns the contents formatted for HTML output.
+
+* **Returns:** HTML string contents
+* **Return type:** `string`
+
+Example:
+```
+$gamestring = new Gamestring('Deals <c val="bfd4fd">350</c> damage');
+echo $gamestring->asHtml();
+// 'Deals <span style="color: #bfd4fd">350</span> damage'
+```
+
+### withLevel()
+
+Returns a new Gamestring with modifiers formatted at a specific level.
+
+* **Parameters:** **$heroId** `string` The "hyperlinkId" Hero identifier
+* **Returns:** A new Gamestring
+* **Return type:** `Gamestring`
+
+Example:
+```
+$gamestring = new Gamestring('Deals <c val="bfd4fd">350~~0.04~~</c> damage');
+echo $gamestring->withLevel(10);
+// 'Deals <c val="bfd4fd">518</c> damage'
+```
+
+### withScaling()
+
+Returns a new Gamestring with modifiers formatted for readability.
+
+* **Parameters:** **$format** `string|null` The `sprintf` format to use, defaults to ' (%+g%% per level)', e.g. " (+4% per level)"
+* **Returns:** A new Gamestring
+* **Return type:** `Gamestring`
+
+Example:
+```
+$gamestring = new Gamestring('Deals <c val="bfd4fd">350~~0.04~~</c> damage');
+echo $gamestring->withLevel(10);
+// 'Deals <c val="bfd4fd">350 (+4% per level)</c> damage'
+```
+
+### withoutTags()
+
+Returns a new Gamestring with all tags stripped, leaving their content.
+
+* **Returns:** A new Gamestring
+* **Return type:** `Gamestring`
+
+Example:
+```
+$gamestring = new Gamestring('Deals <c val="bfd4fd">350~~0.04~~</c> damage');
+echo $gamestring->withoutTags();
+// 'Deals 350~~0.04~~ damage'
+```
+
+### withoutTag()
+
+Returns a new Gamestring with a specific tag stripped.
+
+* **Parameters:** **$tag** `string` The tag to remove. One of: `<c>`, `<s>`, `<n>`, `<img>`
+* **Returns:** A new Gamestring
+* **Return type:** `Gamestring`
+
+Example:
+```
+$gamestring = new Gamestring('Deals <c val="bfd4fd">350~~0.04~~</c> damage');
+echo $gamestring->withoutTag('<c>');
+// 'Deals 350~~0.04~~ damage'
+```
+
+### withoutColor()
+### withoutImage()
+### withoutStandard()
+
+Returns a new Gamestring with tags stripped.
+
+* **Returns:** A new Gamestring
+* **Return type:** `Gamestring`
+
+Example:
+```
+$gamestring = new Gamestring('Deals <c val="bfd4fd">350~~0.04~~</c> damage');
+echo $gamestring->withoutColor();
+// 'Deals 350~~0.04~~ damage'
+```
+
+### withoutNewline()
+
+Returns a new Gamestring with `<n>` tags replaced.
+
+* **Parameters:** **$tag** `string` The string to use for replacement, defaults to a space
+* **Returns:** A new Gamestring
+* **Return type:** `Gamestring`
+
+Example:
+```
+$gamestring = new Gamestring('Deals<n/><c val="bfd4fd">350~~0.04~~</c> damage');
+echo $gamestring->withoutNewline();
+// 'Deals 350~~0.04~~ damage'
 ```
 
 ## Factories
@@ -246,8 +395,6 @@ Creates a new Factory.
 
 * **Parameters:** **$locale** `string|null` The locale for the `StringProvider` (see above), defaults to "enus"
 * **Parameters:** **$patch** `string|null` The patch version to use, defaults to the latest available
-* **Returns:** A new Factory
-* **Return type:** `BaseFactory`
 
 Example:
 ```
@@ -259,7 +406,7 @@ $koreanHeroes = new HeroFactory(StringProvider::KOREA);
 Allows Factories to be iterated over (e.g. passed to `foreach`) to access all their members.
 
 * **Parameters:** *none*
-* **Returns:** Traversable
+* **Returns:** Traversable version of all Factory members
 * **Return type:** `Traversable`
 
 Example:
