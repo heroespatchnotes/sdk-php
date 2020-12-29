@@ -35,7 +35,7 @@ final class Gamestring
 	/**
 	 * Replaces color tags with their HTML equivalent.
 	 *
-	 * @param string $contents
+	 * @param string $string
 	 *
 	 * @return string
 	 */
@@ -60,7 +60,7 @@ final class Gamestring
 	/**
 	 * Replaces image tags with an approximate Unicode equivalent.
 	 *
-	 * @param string $contents
+	 * @param string $string
 	 *
 	 * @return string
 	 */
