@@ -20,8 +20,8 @@ final class Gamestring
 	 */
 	const ALLOWED_TAGS = [
 		'<c>',
-		'<n>',
 		'<s>',
+		'<n>',
 		'<img>',
 	];
 
@@ -29,6 +29,62 @@ final class Gamestring
 	 * @var string
 	 */
 	private $content;
+
+	//--------------------------------------------------------------------
+
+	/**
+	 * Replaces color tags with their HTML equivalent.
+	 *
+	 * @param string $contents
+	 *
+	 * @return string
+	 */
+	public static function colorHtml(string $string): string
+	{
+		// Convert <s> tags the same
+		$string = str_replace('<s', '<c', $string);
+
+		$string = preg_replace_callback('/<c val="[[:xdigit:]]+"/', function ($matches) {
+			$parts  = explode('=', $matches[0]);
+			$result = str_replace('c val', 'span', $parts[0]);
+
+			$result .= ' style="color: #';
+			$result .= ltrim($parts[1], '"');
+
+			return $result;
+		}, $string);
+
+		return str_replace(['</c>', '</s>'], '</span>', $string);
+	}
+
+	/**
+	 * Replaces image tags with an approximate Unicode equivalent.
+	 *
+	 * @param string $contents
+	 *
+	 * @return string
+	 */
+	public static function imageHtml(string $string): string
+	{
+		$string = preg_replace_callback('/<img path="@UI\/[A-Za-z]+".*?>/', function ($matches) {
+			$parts = explode('"', $matches[0]);
+			$parts = explode('/', $parts[1]);
+
+			switch ($parts[1])
+			{
+				case 'StormTalentInTextQuestIcon':
+					return "\u{2757}";
+				case 'StormTalentInTextArmorIcon':
+					return "\u{1F6E1}";
+			}
+
+			return $parts[1];
+		}, $string);
+
+		return str_replace(['</c>', '</s>'], '</span>', $string);
+	}
+
+	//--------------------------------------------------------------------
 
 	/**
 	 * Stores the string
@@ -39,8 +95,6 @@ final class Gamestring
 	{
 		$this->content = $content;
 	}
-
-	//--------------------------------------------------------------------
 
 	/**
 	 * Returns the content directly.
@@ -69,7 +123,12 @@ final class Gamestring
 	 */
 	public function asHtml(): string
 	{
-		return $this->content;
+		$string = $this->withoutNewline('<br>')->asRaw();
+		$string = self::colorHtml($string);
+		$string = self::imageHtml($string);
+		$string = str_replace('name=', 'class=', $string);
+
+		return $string;
 	}
 
 	/**

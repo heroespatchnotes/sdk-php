@@ -5,6 +5,26 @@ use Tests\Support\TestCase;
 
 class GamestringTest extends TestCase
 {
+	public function testColorHtml()
+	{
+		$content  = 'string <c val="bfd4fd">350~~0.04~~</c>';
+		$expected = 'string <span style="color: #bfd4fd">350 (+4% per level)</span>';
+
+		$gamestring = new Gamestring($content);
+
+		$this->assertEquals($content, (string) $gamestring);
+	}
+
+	public function testImageHtml()
+	{
+		$content  = 'string <img path="@UI/StormTalentInTextArmorIcon" alignment="uppermiddle" color="BBBBBB" width="20" height="22"/>';
+		$expected = 'string ' . "\u{1F6E1}";
+
+		$gamestring = new Gamestring($content);
+
+		$this->assertEquals($content, (string) $gamestring);
+	}
+
 	public function testToString()
 	{
 		$content = 'string <c val="bfd4fd">350~~0.04~~</c>';
@@ -148,5 +168,15 @@ class GamestringTest extends TestCase
 		$gamestring = (new Gamestring($content))->withoutNewline('_');
 
 		$this->assertEquals($expected, (string) $gamestring);
+	}
+
+	public function testAsHtml()
+	{
+		$content  = 'string <img path="@UI/StormTalentInTextArmorIcon" alignment="uppermiddle" color="BBBBBB" width="20" height="22"/> <c val="bfd4fd">350~~0.04~~</c>';
+		$expected = 'string ' . "\u{1F6E1}" . ' <span style="color: #bfd4fd">350~~0.04~~</span>';
+
+		$result = (new Gamestring($content))->asHtml();
+
+		$this->assertEquals($expected, $result);
 	}
 }
