@@ -1,6 +1,8 @@
 # Release Notes
 
-## [Unreleased](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.2...develop)
+## [Unreleased](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.3...develop)
+
+## [v0.9-beta.3 (2020-12-29)](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.2...v0.9-beta.3)
 
 - `Gamestring` class added to add formatting for all `StringProvider` output on Entities ([](https://github.com/heroespatchnotes/sdk-php/commit/81be7586062d6a9003e660e22868859a9ae2a007))
 - `StringProvider` locale constants have been moved to a single array constant, `LOCALE` ([](https://github.com/heroespatchnotes/sdk-php/commit/59163d246b217adb29796db5036c7db522025cf8))
