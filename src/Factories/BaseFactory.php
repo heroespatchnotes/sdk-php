@@ -28,14 +28,7 @@ abstract class BaseFactory implements IteratorAggregate
 	 *
 	 * @var string
 	 */
-	protected $stringsPath;
-
-	/**
-	 * Keys to check for Entity game Strings. Set by child.
-	 *
-	 * @var string[]
-	 */
-	protected $stringsKeys;
+	protected $subGroup;
 
 	/**
 	 * @var DataProvider
@@ -70,13 +63,12 @@ abstract class BaseFactory implements IteratorAggregate
 	protected function getStrings(string $id): array
 	{
 		// Harvest the relevant strings
-		$path    = $this->stringsPath;
 		$strings = [];
-		foreach ($this->stringsKeys as $key)
+		foreach ($this->strings->gamestrings->{$this->subGroup} as $key => $contents)
 		{
-			if (isset($this->strings->gamestrings->$path->$key->$id))
+			if (isset($contents->$id))
 			{
-				$strings[$key] = new Gamestring($this->strings->gamestrings->$path->$key->$id);
+				$strings[$key] = new Gamestring($contents->$id);
 			}
 		}
 

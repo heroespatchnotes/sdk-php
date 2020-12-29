@@ -25,32 +25,11 @@ class HeroFactory extends BaseFactory
 	protected $group = DataProvider::HERO;
 
 	/**
-	 * Path to the Entity's game Strings. Set by child.
+	 * Path to the Entity's game Strings.
 	 *
 	 * @var string
 	 */
-	protected $stringsPath = 'unit';
-
-	/**
-	 * Keys to check for Entity game Strings. Set by child.
-	 *
-	 * @var string[]
-	 */
-	protected $stringsKeys = [
-		'damagetype',
-		'description',
-		'difficulty',
-		'energytype',
-		'expandedrole',
-		'infotext',
-		'lifetype',
-		'name',
-		'role',
-		'searchtext',
-		'shieldtype',
-		'title',
-		'type',
-	];
+	protected $subGroup = 'unit';
 
 	/**
 	 * Returns a hero identified by $heroId

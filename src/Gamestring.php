@@ -182,6 +182,19 @@ final class Gamestring
 	//--------------------------------------------------------------------
 
 	/**
+	 * Removes all tags, leaving their interior content.
+	 *
+	 * @return self
+	 */
+	public function withoutTags(): self
+	{
+		return $this->withoutColor()
+			->withoutImage()
+			->withoutStandard()
+			->withoutNewline();
+	}
+
+	/**
 	 * Removes a specific tag, leaving its interior content.
 	 *
 	 * @param string $tag
@@ -194,19 +207,6 @@ final class Gamestring
 		$content = strip_tags($this->content, $allowed);
 
 		return new self($content);
-	}
-
-	/**
-	 * Removes all tags, leaving their interior content.
-	 *
-	 * @return self
-	 */
-	public function withoutTags(): self
-	{
-		return $this->withoutColor()
-			->withoutImage()
-			->withoutStandard()
-			->withoutNewline();
 	}
 
 	/**
