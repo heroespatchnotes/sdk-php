@@ -44,12 +44,12 @@ class Talent extends Skill
 	}
 
 	/**
-	 * Returns the linked Abilities.
+	 * Returns the nameIds for linked Abilities.
 	 *
-	 * @return Ability[]
+	 * @return string[]
 	 */
 	public function abilities(): array
 	{
-		return [];
+		return $this->__isset('abilityTalentLinkIds') ? $this->__get('abilityTalentLinkIds') : [];
 	}
 }

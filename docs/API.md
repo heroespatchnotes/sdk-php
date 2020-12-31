@@ -442,6 +442,35 @@ foreach ($abathur->abilities() as $ability)
 
 > Creates skill entities for their respective types.
 
+### get()
+
+Returns an Ability or Talent by its ID.
+
+* **Parameters:** **$id** `string` The combined ID, equivalent to `Skill::id()`
+* **Returns:** A new `Skill` Entity
+* **Return type:** `Ability` or `Talent`
+
+Example:
+```
+$talent = $talents->get('AbathurMasteryPressurizedGlands|AbathurSymbiotePressurizedGlandsTalent|W|False');
+echo $talent->abilityType;
+// "W"
+```
+
+### getByNameId()
+
+Returns an Ability or Talent by its ID.
+
+* **Parameters:** **$nameId** `string` The name ID
+* **Returns:** A new `Skill` Entity
+* **Return type:** `Ability` or `Talent`
+
+Example:
+```
+$talent = $talents->getByNameId('AbathurMasteryPressurizedGlands');
+echo $talent->abilityType;
+// "W"
+```
 
 ### hero()
 
@@ -465,6 +494,16 @@ foreach ($abilityFactory->hero('Chromie') as $talent)
 
 > `Entities` build on `Providers` to simplify access to common data components. Entities are usually created from their Factory.
 
+### __get()
+
+`Entities` have a magic accessor to allow acces to their underlying data contents.
+
+Example:
+```
+echo $abathur->talents->level1[0]->icon;
+// "storm_ui_icon_abathur_spikeburst.png"
+```
+
 ### id()
 
 Returns the unique identifier for the Entity.
@@ -481,11 +520,11 @@ echo $hero->id();
 
 ### string()
 
-Returns the corresponding game String named `$key`.
+Returns the corresponding `Gamestring` named `$key`.
 
 * **Parameters:** **$key** `string` The key to the game String.
-* **Returns:** A unique ID that varies by each Entity
-* **Return type:** `string`
+* **Returns:** The corresponding string from `StringProvider`
+* **Return type:** `Gamestring`
 
 Example:
 ```
