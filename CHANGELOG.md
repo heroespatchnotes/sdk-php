@@ -2,6 +2,11 @@
 
 ## [Unreleased](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.3...develop)
 
+## [v0.9-beta.4 (2020-12-31)](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.3...v0.9-beta.4)
+
+- Added `SkillFactory::getByNameId()` for easier `Ability` and `Talent` access. This includes Factory indexing under the hood. ([](https://github.com/heroespatchnotes/sdk-php/commit/dae06125057184519b08fd35124070a5ee74f62d))
+- Added `Talent::abilities()` to get the name IDs for linked Abilities ([](https://github.com/heroespatchnotes/sdk-php/commit/ae87a9720885a3ee05526312b5dfee9f7d268111))
+
 ## [v0.9-beta.3 (2020-12-29)](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.2...v0.9-beta.3)
 
 - `Gamestring` class added to add formatting for all `StringProvider` output on Entities ([](https://github.com/heroespatchnotes/sdk-php/commit/81be7586062d6a9003e660e22868859a9ae2a007))
