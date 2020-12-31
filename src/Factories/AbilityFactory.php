@@ -19,6 +19,11 @@ use Traversable;
 class AbilityFactory extends SkillFactory
 {
 	/**
+	 * @var Ability[]
+	 */
+	protected $entities;
+
+	/**
 	 * Returns a Hero's Abilities
 	 *
 	 * @param string $heroId

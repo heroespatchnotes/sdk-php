@@ -6,8 +6,6 @@ namespace Heroes\Factories;
 
 use Heroes\Entities\Hero;
 use Heroes\Providers\DataProvider;
-use ArrayIterator;
-use Traversable;
 
 /**
  * Hero Factory
@@ -32,34 +30,28 @@ class HeroFactory extends BaseFactory
 	protected $subGroup = 'unit';
 
 	/**
-	 * Returns a hero identified by $heroId
-	 *
-	 * @param string $heroId
-	 *
-	 * @return Hero
+	 * @var Hero[]
 	 */
-	public function get(string $heroId): Hero
+	protected $entities;
+
+	/**
+	 * Creates the array of Heroes and its heroId index.
+	 *
+	 * @return void
+	 */
+	protected function build(): void
 	{
-		// Use the other factories to get child content
 		$abilities = new AbilityFactory($this->strings->getGroup(), $this->data->getPatch());
 		$talents   = new TalentFactory($this->strings->getGroup(), $this->data->getPatch());
+		$index     = 0;
 
-		return new Hero($heroId, $abilities->hero($heroId), $talents->hero($heroId), $this->getStrings($heroId));
-	}
-	/**
-	 * Returns an iterable version of all Heroes.
-	 *
-	 * @return Traversable
-	 */
-	public function getIterator(): Traversable
-	{
-		$heroes = [];
-
+		$this->entities = [];
 		foreach ($this->data->getContents() as $heroId => $heroContents)
 		{
-			$heroes[] = $this->get($heroId);
+			// Use the other factories to get related Entities
+			$this->entities[$index] = new Hero($heroId, $abilities->hero($heroId), $talents->hero($heroId), $this->getStrings($heroId));
+			$this->ids[$heroId]     = $index;
+			$index++;
 		}
-
-		return new ArrayIterator($heroes);
 	}
 }

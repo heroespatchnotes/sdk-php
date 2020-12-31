@@ -1,5 +1,6 @@
 <?php
 
+use Heroes\Entities\Ability;
 use Heroes\Factories\AbilityFactory;
 use Tests\Support\TestCase;
 
@@ -30,5 +31,13 @@ class AbilityFactoryTest extends TestCase
 		$this->assertEquals('HeroAbathur', $ability->unit());
 		$this->assertEquals('basic', $ability->type());
 		$this->assertEquals(false, $ability->sub());
+	}
+
+	public function testGetByNameId()
+	{
+		$result = $this->abilities->getByNameId('AbathurEvolveMonstrosity');
+
+		$this->assertInstanceOf(Ability::class, $result);
+		$this->assertEquals('Heroic', $result->abilityType);
 	}
 }

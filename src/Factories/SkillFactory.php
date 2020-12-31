@@ -6,8 +6,6 @@ namespace Heroes\Factories;
 
 use Heroes\Entities\Skill;
 use Heroes\Providers\DataProvider;
-use ArrayIterator;
-use Traversable;
 
 /**
  * Skill Factory
@@ -32,6 +30,13 @@ abstract class SkillFactory extends BaseFactory
 	protected $subGroup = 'abiltalent';
 
 	/**
+	 * Index of nameId to the key in $entities
+	 *
+	 * @var array<string,int>
+	 */
+	protected $nameIds = [];
+
+	/**
 	 * Returns a Hero's Skills
 	 *
 	 * @param string $heroId
@@ -41,19 +46,48 @@ abstract class SkillFactory extends BaseFactory
 	abstract public function hero(string $heroId): array;
 
 	/**
-	 * Returns an iterable version of all Skills.
+	 * Creates the array of Skills and indexes of
+	 * the Skill's ID and nameId.
 	 *
-	 * @return Traversable
+	 * @return void
 	 */
-	public function getIterator(): Traversable
+	protected function build(): void
 	{
-		$skills = [];
+		$index          = 0;
+		$this->entities = [];
 
 		foreach ($this->data->getContents() as $heroId => $heroContents)
 		{
-			$skills = array_merge($skills, $this->hero($heroId));
+			foreach ($this->hero($heroId) as $skill)
+			{
+				$this->entities[$index]        = $skill;
+				$this->ids[$skill->id()]       = $index;
+				$this->nameIds[$skill->nameId] = $index;
+
+				$index++;
+			}
+		}
+	}
+
+	/**
+	 * Returns a single Entity by its nameId.
+	 *
+	 * @param string $nameId
+	 *
+	 * @return Skill|null
+	 */
+	public function getByNameId(string $nameId): ?Skill
+	{
+		if (is_null($this->entities))
+		{
+			$this->build();
 		}
 
-		return new ArrayIterator($skills);
+		if (array_key_exists($nameId, $this->nameIds))
+		{
+			return $this->entities[$this->nameIds[$nameId]];
+		}
+
+		return null;
 	}
 }
