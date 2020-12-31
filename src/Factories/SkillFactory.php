@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Heroes\Factories;
 
+use Heroes\Entities\Ability;
 use Heroes\Entities\Skill;
+use Heroes\Entities\Talent;
 use Heroes\Providers\DataProvider;
 
 /**
@@ -35,6 +37,11 @@ abstract class SkillFactory extends BaseFactory
 	 * @var array<string,int>
 	 */
 	protected $nameIds = [];
+
+	/**
+	 * @var Ability[]|Talent[]|null
+	 */
+	protected $entities;
 
 	/**
 	 * Returns a Hero's Skills
@@ -74,7 +81,7 @@ abstract class SkillFactory extends BaseFactory
 	 *
 	 * @param string $nameId
 	 *
-	 * @return Skill|null
+	 * @return Ability|Talent|null
 	 */
 	public function getByNameId(string $nameId): ?Skill
 	{
