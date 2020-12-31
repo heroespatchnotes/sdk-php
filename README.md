@@ -50,21 +50,20 @@ version of data to use.
 
 Available groups are defined as class constants on the `DataProvider` class:
 ```
-const ANNOUNCER         = 'announcer';
-const BANNER            = 'banner';
-const BEHAVIORVETERANCY = 'behaviorveterancy';
-const EMOTICON          = 'emoticon';
-const EMOTICONPACK      = 'emoticonpack';
-const HERO              = 'hero';
-const HEROSKIN          = 'heroskin';
-const MATCHAWARD        = 'matchaward';
-const MOUNT             = 'mount';
-const PORTRAIT          = 'portrait';
-const PORTRAITPACK      = 'portraitpack';
-const REWARDPORTRAIT    = 'rewardportrait';
-const SPRAY             = 'spray';
-const UNIT              = 'unit';
-const VOICELINE         = 'voiceline';
+const LOCALE = [
+	'Germany' => 'dede',
+	'USA'     => 'enus',
+	'Spain'   => 'eses',
+	'Mexico'  => 'esmx',
+	'France'  => 'frfr',
+	'Italy'   => 'itit',
+	'Korea'   => 'kokr',
+	'Poland'  => 'plpl',
+	'Brazil'  => 'ptbr',
+	'Russia'  => 'ruru',
+	'China'   => 'zhcn',
+	'Taiwan'  => 'zhtw',
+];
 ```
 
 #### StringProvider
