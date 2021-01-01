@@ -75,16 +75,13 @@ abstract class BaseFactory implements IteratorAggregate
 	 *
 	 * @return array<string,Gamestring>
 	 */
-	protected function getStrings(string $id): array
+	protected function fetchStrings(string $id): array
 	{
 		// Harvest the relevant strings
 		$strings = [];
 		foreach ($this->strings->gamestrings->{$this->subGroup} as $key => $contents)
 		{
-			if (isset($contents->$id))
-			{
-				$strings[$key] = new Gamestring($contents->$id);
-			}
+			$strings[$key] = isset($contents->$id) ? new Gamestring($contents->$id) : null;
 		}
 
 		return $strings;

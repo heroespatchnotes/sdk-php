@@ -70,7 +70,7 @@ class AbilityFactory extends SkillFactory
 			foreach ($collection as $contents)
 			{
 				$skillId = Skill::createId($contents);
-				$strings = $this->getStrings($skillId);
+				$strings = $this->fetchStrings($skillId);
 
 				$abilities[] = new Ability($heroId, $unitId, $type, false, $contents, $strings);
 			}
@@ -88,7 +88,7 @@ class AbilityFactory extends SkillFactory
 						foreach ($collection as $contents)
 						{
 							$skillId = Skill::createId($contents);
-							$strings = $this->getStrings($skillId);
+							$strings = $this->fetchStrings($skillId);
 
 							$abilities[] = new Ability($heroId, $unitId, $type, true, $contents, $strings);
 						}
