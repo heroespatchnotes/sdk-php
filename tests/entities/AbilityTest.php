@@ -8,23 +8,23 @@ use Tests\Support\TestCase;
 class AbilityTest extends TestCase
 {
 	/**
-	 * @var AbilityFactory|null
-	 */
-	private $abilities;
-
-	/**
-	 * @var Ability
+	 * @var Ability|null
 	 */
 	private $ability;
 
 	protected function setUp(): void
 	{
-		if (is_null($this->abilities))
+		if (is_null($this->ability))
 		{
-			$this->abilities = new AbilityFactory();
+			$this->ability = (new AbilityFactory)->getByNameId('AbathurEvolveMonstrosity');
 		}
+	}
 
-		$this->ability = $this->abilities->getByNameId('AbathurEvolveMonstrosity');
+	public function testMagicGet()
+	{
+		$result = $this->ability->abilityType;
+
+		$this->assertEquals('Heroic', $result);
 	}
 
 	public function testUnitId()

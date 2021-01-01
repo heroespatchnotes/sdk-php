@@ -8,23 +8,23 @@ use Tests\Support\TestCase;
 class TalentTest extends TestCase
 {
 	/**
-	 * @var TalentFactory|null
-	 */
-	private $talents;
-
-	/**
-	 * @var Talent
+	 * @var Talent|null
 	 */
 	private $talent;
 
 	protected function setUp(): void
 	{
-		if (is_null($this->talents))
+		if (is_null($this->talent))
 		{
-			$this->talents = new TalentFactory();
+			$this->talent = (new TalentFactory)->getByNameId('AbathurMasteryPressurizedGlands');
 		}
+	}
 
-		$this->talent = $this->talents->getByNameId('AbathurMasteryPressurizedGlands');
+	public function testMagicGet()
+	{
+		$result = $this->talent->abilityType;
+
+		$this->assertEquals('W', $result);
 	}
 
 	public function testLevel()
