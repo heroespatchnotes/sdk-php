@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.5...develop)
+## [Unreleased](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.6...develop)
+
+## [v0.9-beta.6 (2021-01-01)](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.5...v0.9-beta.6)
+
+- Fixed a bug where `Factories` were not setting `null` strings on missing keys. ([](https://github.com/heroespatchnotes/sdk-php/pull/11/commits/3c93e991e4978bbf4b392c0b695be477a0a22780))
 
 ## [v0.9-beta.5 (2021-01-01)](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.4...v0.9-beta.5)
 
