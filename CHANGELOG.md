@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.3...develop)
+## [Unreleased](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.5...develop)
+
+## [v0.9-beta.5 (2021-01-01)](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.4...v0.9-beta.5)
+
+- Fixed a bug where the `HeroFactory` would fail to set a `Hero`'s contents, making game data unavailable for those entities. ([](https://github.com/heroespatchnotes/sdk-php/pull/10/commits/0feda27ef5f180ea72af21683a1b68559e516eca))
 
 ## [v0.9-beta.4 (2020-12-31)](https://github.com/heroespatchnotes/sdk-php/compare/v0.9-beta.3...v0.9-beta.4)
 
