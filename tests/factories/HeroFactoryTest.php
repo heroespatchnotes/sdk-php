@@ -30,7 +30,7 @@ class HeroFactoryTest extends TestCase
 		$this->assertEquals('Abathur', $result->id());
 	}
 
-	public function testPassesStrings()
+	public function testPassesGametrings()
 	{
 		$hero = $this->heroes->get('Abathur');
 
@@ -42,6 +42,19 @@ class HeroFactoryTest extends TestCase
 		] as $key)
 		{
 			$this->assertInstanceOf(Gamestring::class, $hero->string($key));
+		}
+	}
+
+	public function testPassesNullGametrings()
+	{
+		$hero = $this->heroes->get('Abathur');
+
+		foreach ([
+			'damagetype',
+			'energytype',
+		] as $key)
+		{
+			$this->assertNull($hero->string($key));
 		}
 	}
 }

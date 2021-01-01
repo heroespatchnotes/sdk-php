@@ -22,7 +22,7 @@ abstract class BaseEntity
 	/**
 	 * Array of selected game Strings
 	 *
-	 * @var array<string,Gamestring>
+	 * @var array<string,Gamestring|null>
 	 */
 	protected $strings;
 
@@ -41,11 +41,11 @@ abstract class BaseEntity
 	 *
 	 * @param string $key
 	 *
-	 * @return Gamestring
+	 * @return Gamestring|null
 	 *
 	 * @throws RuntimeException For missing key
 	 */
-	public function string(string $key): Gamestring
+	public function string(string $key): ?Gamestring
 	{
 		if (! array_key_exists($key, $this->strings))
 		{
@@ -58,7 +58,7 @@ abstract class BaseEntity
 	/**
 	 * Returns all Gamestrings.
 	 *
-	 * @return array<string,Gamestring>
+	 * @return array<string,Gamestring|null>
 	 */
 	public function strings(): array
 	{

@@ -49,7 +49,7 @@ class HeroFactory extends BaseFactory
 		foreach ($this->data->getContents() as $heroId => $heroContents)
 		{
 			// Use the other factories to get related Entities
-			$this->entities[$index] = new Hero($heroId, $abilities->hero($heroId), $talents->hero($heroId), $heroContents, $this->getStrings($heroId));
+			$this->entities[$index] = new Hero($heroId, $abilities->hero($heroId), $talents->hero($heroId), $heroContents, $this->fetchStrings($heroId));
 			$this->ids[$heroId]     = $index;
 			$index++;
 		}

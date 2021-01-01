@@ -39,7 +39,7 @@ class TalentFactory extends SkillFactory
 			foreach ($collection as $contents)
 			{
 				$skillId = Skill::createId($contents);
-				$strings = $this->getStrings($skillId);
+				$strings = $this->fetchStrings($skillId);
 
 				$talents[] = new Talent($heroId, $levelId, $contents, $strings);
 			}
