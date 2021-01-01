@@ -50,6 +50,33 @@ version of data to use.
 
 Available groups are defined as class constants on the `DataProvider` class:
 ```
+const ANNOUNCER         = 'announcer';
+const BANNER            = 'banner';
+const BEHAVIORVETERANCY = 'behaviorveterancy';
+const EMOTICON          = 'emoticon';
+const EMOTICONPACK      = 'emoticonpack';
+const HERO              = 'hero';
+const HEROSKIN          = 'heroskin';
+const MATCHAWARD        = 'matchaward';
+const MOUNT             = 'mount';
+const PORTRAIT          = 'portrait';
+const PORTRAITPACK      = 'portraitpack';
+const REWARDPORTRAIT    = 'rewardportrait';
+const SPRAY             = 'spray';
+const UNIT              = 'unit';
+const VOICELINE         = 'voiceline';
+```
+
+#### StringProvider
+
+A `StringProvider` accesses game strings from the **gamestrings** subdirectories of a patch.
+Each `StringProvider` requires a `$group` corresponding to the locale, and a `$patch` for the
+version of data to use.
+
+> Note: Omitting `$patch` will default to the latest available. You may always check a `Provider`'s patch by its `getPatch()` method.
+
+Available groups are defined as class constants on the `StringProvider` class:
+```
 const LOCALE = [
 	'Germany' => 'dede',
 	'USA'     => 'enus',
@@ -63,31 +90,7 @@ const LOCALE = [
 	'Russia'  => 'ruru',
 	'China'   => 'zhcn',
 	'Taiwan'  => 'zhtw',
-];
-```
-
-#### StringProvider
-
-A `StringProvider` accesses game strings from the **gamestrings** subdirectories of a patch.
-Each `StringProvider` requires a `$group` corresponding to the locale, and a `$patch` for the
-version of data to use.
-
-> Note: Omitting `$patch` will default to the latest available. You may always check a `Provider`'s patch by its `getPatch()` method.
-
-Available groups are defined as class constants on the `StringProvider` class:
-```
-const GERMANY = 'dede';
-const USA     = 'enus';
-const SPAIN   = 'eses';
-const MEXICO  = 'esmx';
-const FRANCE  = 'frfr';
-const ITALY   = 'itit';
-const KOREA   = 'kokr';
-const POLAND  = 'plpl';
-const BRAZIL  = 'ptbr';
-const RUSSIA  = 'ruru';
-const CHINA   = 'zhcn';
-const TAIWAN  = 'zhtw';
+ ];
 ```
 
 #### Examples
@@ -130,7 +133,7 @@ methods for many endpoints.
 specific:
 ```
 // Tassadar, pre-rework, in French
-$heroes   = new HeroFactory(StringProvider::FRANCE, '2.49.2.77981');
+$heroes   = new HeroFactory(StringProvider::LOCALE['France'], '2.49.2.77981');
 $tassadar = $heroes->get('Tassadar');
 foreach ($tassadar->abilities() as $ability)
 {

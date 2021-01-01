@@ -522,12 +522,12 @@ echo $hero->id();
 
 Returns the corresponding `Gamestring` named `$key`.
 
-* **Parameters:** **$key** `string` The key to the game String.
+* **Parameters:** **$key** `string` The key to the Gamestring.
 * **Returns:** The corresponding string from `StringProvider`
 * **Return type:** `Gamestring`
 
 Example:
 ```
-echo $abathur->string('description');
+echo $abathur->string('description')->asRaw();
 // "A unique Hero that can manipulate the battle from anywhere on the map.";
 ```
